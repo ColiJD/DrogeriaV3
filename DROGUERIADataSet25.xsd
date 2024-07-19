@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DROGUERIADataSet25" targetNamespace="http://tempuri.org/DROGUERIADataSet25.xsd" xmlns:mstns="http://tempuri.org/DROGUERIADataSet25.xsd" xmlns="http://tempuri.org/DROGUERIADataSet25.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="2" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DROGUERIAConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DROGUERIAConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Drogueria_proyecto.Properties.Settings.GlobalReference.Default.DROGUERIAConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DROGUERIAConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DROGUERIAConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Drogueria_proyecto.Properties.Settings.GlobalReference.Default.DROGUERIAConnectionString1" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DROGUERIAConnectionString2" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DROGUERIAConnectionString2 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Drogueria_proyecto.Properties.Settings.GlobalReference.Default.DROGUERIAConnectionString2" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FacturaEnReporteTableAdapter" GeneratorDataComponentClassName="FacturaEnReporteTableAdapter" Name="FacturaEnReporte" UserDataComponentName="FacturaEnReporteTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DROGUERIAConnectionString2 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Factura.codigo_factura, Producto.nombre_producto, Producto.descripcion_producto, Producto.precio_producto, Cliente.nombre_cliente, Cliente.telefono_cliente, Detalle_Factura.cantidad, Detalle_Factura.subtotal
+FROM            Factura INNER JOIN
+                         Detalle_Factura ON Factura.codigo_factura = Detalle_Factura.codigo_factura INNER JOIN
+                         Empleado ON Factura.codigo_empleado = Empleado.codigo_empleado INNER JOIN
+                         Producto ON Detalle_Factura.codigo_producto = Producto.codigo_producto INNER JOIN
+                         Cliente ON Factura.codigo_cliente = Cliente.codigo_cliente</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="codigo_factura" DataSetColumn="codigo_factura" />
+              <Mapping SourceColumn="nombre_producto" DataSetColumn="nombre_producto" />
+              <Mapping SourceColumn="descripcion_producto" DataSetColumn="descripcion_producto" />
+              <Mapping SourceColumn="precio_producto" DataSetColumn="precio_producto" />
+              <Mapping SourceColumn="nombre_cliente" DataSetColumn="nombre_cliente" />
+              <Mapping SourceColumn="telefono_cliente" DataSetColumn="telefono_cliente" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="subtotal" DataSetColumn="subtotal" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DROGUERIADataSet25" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DROGUERIADataSet25" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DROGUERIADataSet25">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FacturaEnReporte" msprop:Generator_RowEvHandlerName="FacturaEnReporteRowChangeEventHandler" msprop:Generator_RowDeletedName="FacturaEnReporteRowDeleted" msprop:Generator_RowDeletingName="FacturaEnReporteRowDeleting" msprop:Generator_RowEvArgName="FacturaEnReporteRowChangeEvent" msprop:Generator_TablePropName="FacturaEnReporte" msprop:Generator_RowChangedName="FacturaEnReporteRowChanged" msprop:Generator_RowChangingName="FacturaEnReporteRowChanging" msprop:Generator_TableClassName="FacturaEnReporteDataTable" msprop:Generator_RowClassName="FacturaEnReporteRow" msprop:Generator_TableVarName="tableFacturaEnReporte" msprop:Generator_UserTableName="FacturaEnReporte">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo_factura" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="codigo_factura" msprop:Generator_ColumnPropNameInTable="codigo_facturaColumn" msprop:Generator_ColumnVarNameInTable="columncodigo_factura" msprop:Generator_UserColumnName="codigo_factura" type="xs:int" />
+              <xs:element name="nombre_producto" msprop:Generator_ColumnPropNameInRow="nombre_producto" msprop:Generator_ColumnPropNameInTable="nombre_productoColumn" msprop:Generator_ColumnVarNameInTable="columnnombre_producto" msprop:Generator_UserColumnName="nombre_producto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="descripcion_producto" msprop:Generator_ColumnPropNameInRow="descripcion_producto" msprop:Generator_ColumnPropNameInTable="descripcion_productoColumn" msprop:Generator_ColumnVarNameInTable="columndescripcion_producto" msprop:Generator_UserColumnName="descripcion_producto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="precio_producto" msprop:Generator_ColumnPropNameInRow="precio_producto" msprop:Generator_ColumnPropNameInTable="precio_productoColumn" msprop:Generator_ColumnVarNameInTable="columnprecio_producto" msprop:Generator_UserColumnName="precio_producto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="nombre_cliente" msprop:Generator_ColumnPropNameInRow="nombre_cliente" msprop:Generator_ColumnPropNameInTable="nombre_clienteColumn" msprop:Generator_ColumnVarNameInTable="columnnombre_cliente" msprop:Generator_UserColumnName="nombre_cliente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="telefono_cliente" msprop:Generator_ColumnPropNameInRow="telefono_cliente" msprop:Generator_ColumnPropNameInTable="telefono_clienteColumn" msprop:Generator_ColumnVarNameInTable="columntelefono_cliente" msprop:Generator_UserColumnName="telefono_cliente" type="xs:int" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_UserColumnName="cantidad" type="xs:int" minOccurs="0" />
+              <xs:element name="subtotal" msprop:Generator_ColumnPropNameInRow="subtotal" msprop:Generator_ColumnPropNameInTable="subtotalColumn" msprop:Generator_ColumnVarNameInTable="columnsubtotal" msprop:Generator_UserColumnName="subtotal" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FacturaEnReporte" />
+      <xs:field xpath="mstns:codigo_factura" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
