@@ -506,6 +506,7 @@ namespace Drogueria_proyecto
             this.dgvFactura.RowTemplate.Height = 46;
             this.dgvFactura.Size = new System.Drawing.Size(784, 163);
             this.dgvFactura.TabIndex = 51;
+            this.dgvFactura.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactura_CellContentClick);
             this.dgvFactura.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactura_CellContentDoubleClick);
             // 
             // printDocument1

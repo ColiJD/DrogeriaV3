@@ -266,7 +266,9 @@ namespace Drogueria_proyecto
 
         private void dgvFactura_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //txtIDP.Text = dgvFactura.CurrentRow.Cells[4].Value.ToString();
+            //string testt = dgvFactura.CurrentRow.Cells[4].Value.ToString();
+            //int testtt = Int32.Parse(testt);
+            //txtIDP.Text = testtt;
             //txtProducto.Text = dgvFactura.CurrentRow.Cells[5].Value.ToString();
             //txtPrecio.Text = dgvFactura.CurrentRow.Cells[6].Value.ToString();
             //txtCantidad.Text = dgvFactura.CurrentRow.Cells[7].Value.ToString();
@@ -320,6 +322,11 @@ namespace Drogueria_proyecto
         }
 
         private void txtProducto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvFactura_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

@@ -225,5 +225,10 @@ namespace Drogueria_proyecto
         {
 
         }
+
+        private void dtg_administrador_empleado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

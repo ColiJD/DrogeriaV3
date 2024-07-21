@@ -58,6 +58,7 @@ namespace Drogueria_proyecto
             txt_usuaempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[2].Value.ToString();
             txt_pas_ad.Text = dtg_administrador_empleado.CurrentRow.Cells[3].Value.ToString();
             txt_tipoempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[4].Value.ToString();
+            txt_correoempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[5].Value.ToString();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -245,11 +246,11 @@ namespace Drogueria_proyecto
         private void txt_correoempl_gr_TextChanged(object sender, EventArgs e)
         {
             
-                if (validaciones.validarcorreo(txt_correoempl_gr.Text, "El correo solo permite @ _ . y letras"))
-                {
-                    errorP_correoempl_ad.SetError(txt_correoempl_gr, "El correo solo permite @ _ . y letras");
-                    txt_correoempl_gr.Text = "";
-                }
+                //if (validaciones.validarcorreo(txt_correoempl_gr.Text, "El correo solo permite @ _ . y letras"))
+                //{
+                    //errorP_correoempl_ad.SetError(txt_correoempl_gr, "El correo solo permite @ _ . y letras");
+                    //txt_correoempl_gr.Text = "";
+                //}
             
         }
 
