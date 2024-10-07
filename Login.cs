@@ -25,9 +25,37 @@ namespace Drogueria_proyecto
             this.WindowState = FormWindowState.Maximized;
             // Asegurar que la barra de tareas sea visible
             this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
-          
+            
+            textUsuario.MaxLength = 50;
+            textContrasena.MaxLength = 80;
+            textUsuario.TextChanged += new EventHandler(VerificarCampos);
+            textContrasena.TextChanged += new EventHandler(VerificarCampos);
+            textUsuario.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            textContrasena.KeyDown += new KeyEventHandler(AvanzarConEnter);
+
+            // Llamamos a la función de verificación al iniciar para manejar estado inicial
+            VerificarCampos(null, null);
+
+
 
         }
+        // Función que verifica si los campos de usuario y contraseña están vacíos
+        private void VerificarCampos(object sender, EventArgs e)
+        {
+            // Si ambos campos tienen texto, habilitar el botón; de lo contrario, deshabilitar
+            button1.Enabled = !string.IsNullOrWhiteSpace(textUsuario.Text) &&
+                               !string.IsNullOrWhiteSpace(textContrasena.Text);
+        }
+        private void AvanzarConEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Evita que se realicen otras acciones por defecto (como borrar)
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
+
+
 
 
         private void cb_cargo_login_SelectedIndexChanged(object sender, EventArgs e)
@@ -39,7 +67,7 @@ namespace Drogueria_proyecto
         {
             Color bgColor = RGBColors.colorBg;
             BackColor = bgColor;
-
+            textUsuario.Focus();
 
         }
 
@@ -134,11 +162,15 @@ namespace Drogueria_proyecto
                 textUsuario.Text = "";
 
             }
-            //else if(validaciones.validarEmpty(textUsuario.Text, "El nombre de usuario no puede estar vacio"))
-            //{
-            //    errorP_usuario_login.SetError(textUsuario, "El nombre de usuario no puede estar vacio");
+            // Formatear: la primera letra en mayúscula y el resto en minúsculas
+            if (textUsuario.Text.Length > 0)
+            {
+                textUsuario.Text = char.ToUpper(textUsuario.Text[0]) + textUsuario.Text.Substring(1).ToLower();
 
-            //}
+                // Mantener el cursor al final del texto
+                textUsuario.SelectionStart = textUsuario.Text.Length;
+            }
+            
         }
 
         private void textContrasena_TextChanged(object sender, EventArgs e)

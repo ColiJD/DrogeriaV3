@@ -150,6 +150,9 @@
   <data name="&gt;&gt;btnEnviar.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="txbCorreo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
   <data name="txbCorreo.Location" type="System.Drawing.Point, System.Drawing">
     <value>48, 228</value>
   </data>
@@ -279,6 +282,54 @@
   <data name="&gt;&gt;btnCambiar.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;LbTituloPanel.Name" xml:space="preserve">
+    <value>LbTituloPanel</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.Parent" xml:space="preserve">
+    <value>PanelTitulo</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;BtnSalir.Name" xml:space="preserve">
+    <value>BtnSalir</value>
+  </data>
+  <data name="&gt;&gt;BtnSalir.Type" xml:space="preserve">
+    <value>FontAwesome.Sharp.IconButton, FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f</value>
+  </data>
+  <data name="&gt;&gt;BtnSalir.Parent" xml:space="preserve">
+    <value>PanelTitulo</value>
+  </data>
+  <data name="&gt;&gt;BtnSalir.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PanelTitulo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="PanelTitulo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PanelTitulo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 60</value>
+  </data>
+  <data name="PanelTitulo.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;PanelTitulo.Name" xml:space="preserve">
+    <value>PanelTitulo</value>
+  </data>
+  <data name="&gt;&gt;PanelTitulo.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Panel, Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;PanelTitulo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PanelTitulo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="BtnSalir.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -307,54 +358,39 @@
     <value>PanelTitulo</value>
   </data>
   <data name="&gt;&gt;BtnSalir.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="iconCurrentChildForm.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="iconCurrentChildForm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 17</value>
-  </data>
-  <data name="iconCurrentChildForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 26</value>
-  </data>
-  <data name="iconCurrentChildForm.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;iconCurrentChildForm.Name" xml:space="preserve">
-    <value>iconCurrentChildForm</value>
+  <data name="LbTituloPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;iconCurrentChildForm.Type" xml:space="preserve">
-    <value>FontAwesome.Sharp.IconButton, FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f</value>
+  <data name="LbTituloPanel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt, style=Italic</value>
   </data>
-  <data name="&gt;&gt;iconCurrentChildForm.Parent" xml:space="preserve">
+  <data name="LbTituloPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 18</value>
+  </data>
+  <data name="LbTituloPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 1, 0</value>
+  </data>
+  <data name="LbTituloPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 24</value>
+  </data>
+  <data name="LbTituloPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="LbTituloPanel.Text" xml:space="preserve">
+    <value>RECUPERACION DE CONTRASEÑA</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.Name" xml:space="preserve">
+    <value>LbTituloPanel</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LbTituloPanel.Parent" xml:space="preserve">
     <value>PanelTitulo</value>
   </data>
-  <data name="&gt;&gt;iconCurrentChildForm.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="PanelTitulo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="PanelTitulo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PanelTitulo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 60</value>
-  </data>
-  <data name="PanelTitulo.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;PanelTitulo.Name" xml:space="preserve">
-    <value>PanelTitulo</value>
-  </data>
-  <data name="&gt;&gt;PanelTitulo.Type" xml:space="preserve">
-    <value>Guna.UI2.WinForms.Guna2Panel, Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
-  </data>
-  <data name="&gt;&gt;PanelTitulo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PanelTitulo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LbTituloPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

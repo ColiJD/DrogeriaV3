@@ -69,14 +69,16 @@ namespace Drogueria_proyecto
             // textUsuario
             // 
             this.textUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textUsuario.BackColor = System.Drawing.SystemColors.Window;
+            this.textUsuario.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textUsuario.Location = new System.Drawing.Point(19, 272);
             this.textUsuario.Margin = new System.Windows.Forms.Padding(1);
             this.textUsuario.MaximumSize = new System.Drawing.Size(500, 30);
             this.textUsuario.MinimumSize = new System.Drawing.Size(200, 30);
             this.textUsuario.Multiline = true;
             this.textUsuario.Name = "textUsuario";
+            this.textUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textUsuario.Size = new System.Drawing.Size(500, 30);
             this.textUsuario.TabIndex = 2;
             this.textUsuario.TextChanged += new System.EventHandler(this.textUsuario_TextChanged);
@@ -114,8 +116,7 @@ namespace Drogueria_proyecto
             // textContrasena
             // 
             this.textContrasena.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textContrasena.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textContrasena.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textContrasena.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textContrasena.Location = new System.Drawing.Point(19, 354);
             this.textContrasena.Margin = new System.Windows.Forms.Padding(1);
             this.textContrasena.MaximumSize = new System.Drawing.Size(500, 30);

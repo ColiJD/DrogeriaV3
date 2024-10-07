@@ -39,6 +39,7 @@ namespace Drogueria_proyecto.SecurityPassword
             this.label1 = new System.Windows.Forms.Label();
             this.txbConfirmarPass = new System.Windows.Forms.TextBox();
             this.PanelTitulo = new Guna.UI2.WinForms.Guna2Panel();
+            this.LbTituloPanel = new System.Windows.Forms.Label();
             this.BtnSalir = new FontAwesome.Sharp.IconButton();
             this.btnHome = new FontAwesome.Sharp.IconButton();
             this.PanelTitulo.SuspendLayout();
@@ -124,7 +125,6 @@ namespace Drogueria_proyecto.SecurityPassword
             // 
             this.txbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbUsuario.Location = new System.Drawing.Point(33, 107);
             this.txbUsuario.Margin = new System.Windows.Forms.Padding(2);
@@ -162,6 +162,7 @@ namespace Drogueria_proyecto.SecurityPassword
             // 
             this.PanelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
             this.PanelTitulo.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            this.PanelTitulo.Controls.Add(this.LbTituloPanel);
             this.PanelTitulo.Controls.Add(this.BtnSalir);
             this.PanelTitulo.Controls.Add(this.btnHome);
             this.PanelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -170,6 +171,19 @@ namespace Drogueria_proyecto.SecurityPassword
             this.PanelTitulo.Size = new System.Drawing.Size(493, 60);
             this.PanelTitulo.TabIndex = 9;
             this.PanelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTitulo_MouseDown);
+            // 
+            // LbTituloPanel
+            // 
+            this.LbTituloPanel.AutoSize = true;
+            this.LbTituloPanel.BackColor = System.Drawing.Color.Transparent;
+            this.LbTituloPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LbTituloPanel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.LbTituloPanel.Location = new System.Drawing.Point(132, 19);
+            this.LbTituloPanel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.LbTituloPanel.Name = "LbTituloPanel";
+            this.LbTituloPanel.Size = new System.Drawing.Size(251, 24);
+            this.LbTituloPanel.TabIndex = 6;
+            this.LbTituloPanel.Text = "CAMBIO DE CONTRASEÑA";
             // 
             // BtnSalir
             // 
@@ -196,7 +210,7 @@ namespace Drogueria_proyecto.SecurityPassword
             this.btnHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.ForeColor = System.Drawing.Color.Transparent;
-            this.btnHome.IconChar = FontAwesome.Sharp.IconChar.House;
+            this.btnHome.IconChar = FontAwesome.Sharp.IconChar.MailReply;
             this.btnHome.IconColor = System.Drawing.Color.White;
             this.btnHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnHome.IconSize = 25;
@@ -229,6 +243,7 @@ namespace Drogueria_proyecto.SecurityPassword
             this.Name = "CambiarPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CambiarPassword";
+            this.Load += new System.EventHandler(this.CambiarPassword_Load);
             this.Resize += new System.EventHandler(this.CambiarPassword_Resize);
             this.PanelTitulo.ResumeLayout(false);
             this.PanelTitulo.PerformLayout();
@@ -251,5 +266,6 @@ namespace Drogueria_proyecto.SecurityPassword
         private Guna.UI2.WinForms.Guna2Panel PanelTitulo;
         private FontAwesome.Sharp.IconButton BtnSalir;
         private FontAwesome.Sharp.IconButton btnHome;
+        private System.Windows.Forms.Label LbTituloPanel;
     }
 }

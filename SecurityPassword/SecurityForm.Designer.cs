@@ -37,7 +37,7 @@ namespace Drogueria_proyecto
             this.btnCambiar = new System.Windows.Forms.Button();
             this.PanelTitulo = new Guna.UI2.WinForms.Guna2Panel();
             this.BtnSalir = new FontAwesome.Sharp.IconButton();
-            this.iconCurrentChildForm = new FontAwesome.Sharp.IconButton();
+            this.LbTituloPanel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PanelTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -82,8 +82,8 @@ namespace Drogueria_proyecto
             // 
             this.PanelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
             this.PanelTitulo.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            this.PanelTitulo.Controls.Add(this.LbTituloPanel);
             this.PanelTitulo.Controls.Add(this.BtnSalir);
-            this.PanelTitulo.Controls.Add(this.iconCurrentChildForm);
             resources.ApplyResources(this.PanelTitulo, "PanelTitulo");
             this.PanelTitulo.Name = "PanelTitulo";
             this.PanelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTitulo_MouseDown);
@@ -103,17 +103,12 @@ namespace Drogueria_proyecto
             this.BtnSalir.UseVisualStyleBackColor = false;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
-            // iconCurrentChildForm
+            // LbTituloPanel
             // 
-            this.iconCurrentChildForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
-            resources.ApplyResources(this.iconCurrentChildForm, "iconCurrentChildForm");
-            this.iconCurrentChildForm.ForeColor = System.Drawing.Color.Transparent;
-            this.iconCurrentChildForm.IconChar = FontAwesome.Sharp.IconChar.House;
-            this.iconCurrentChildForm.IconColor = System.Drawing.Color.White;
-            this.iconCurrentChildForm.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconCurrentChildForm.IconSize = 25;
-            this.iconCurrentChildForm.Name = "iconCurrentChildForm";
-            this.iconCurrentChildForm.UseVisualStyleBackColor = false;
+            resources.ApplyResources(this.LbTituloPanel, "LbTituloPanel");
+            this.LbTituloPanel.BackColor = System.Drawing.Color.Transparent;
+            this.LbTituloPanel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.LbTituloPanel.Name = "LbTituloPanel";
             // 
             // SecurityForm
             // 
@@ -148,6 +143,6 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.Button btnCambiar;
         private Guna.UI2.WinForms.Guna2Panel PanelTitulo;
         private FontAwesome.Sharp.IconButton BtnSalir;
-        private FontAwesome.Sharp.IconButton iconCurrentChildForm;
+        private System.Windows.Forms.Label LbTituloPanel;
     }
 }

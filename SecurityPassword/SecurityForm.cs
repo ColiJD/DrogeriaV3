@@ -26,11 +26,30 @@ namespace Drogueria_proyecto
             // Opcional: Deshabilitar los botones de maximizar y minimizar si también lo deseas
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            txbCorreo.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            txbCorreo.MaxLength = 80;
+            txbCorreo.TextChanged += new EventHandler(VerificarCampos);
+            // Llamamos a la función de verificación al iniciar para manejar estado inicial
+            VerificarCampos(null, null);
+
+        }
+        private void VerificarCampos(object sender, EventArgs e)
+        {
+            // Si ambos campos tienen texto, habilitar el botón; de lo contrario, deshabilitar
+            btnEnviar.Enabled = !string.IsNullOrWhiteSpace(txbCorreo.Text);
+        }
+        private void AvanzarConEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Evita que se realicen otras acciones por defecto (como borrar)
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
         }
 
         private void SecurityForm_Load(object sender, EventArgs e)
         {
-           
+            txbCorreo.Focus();
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)

@@ -26,7 +26,41 @@ namespace Drogueria_proyecto.SecurityPassword
             // Opcional: Deshabilitar los botones de maximizar y minimizar si también lo deseas
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            txbUsuario.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            txbActual.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            txbNPass.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            txbConfirmarPass.KeyDown += new KeyEventHandler(AvanzarConEnter);
+            txbUsuario.MaxLength = 32;
+            txbUsuario.TextChanged += new EventHandler(VerificarCampos);
+            txbActual.MaxLength = 32;
+            txbActual.TextChanged += new EventHandler(VerificarCampos);
+            txbNPass.MaxLength = 32;
+            txbNPass.TextChanged += new EventHandler(VerificarCampos);
+            txbConfirmarPass.MaxLength = 32;
+            txbConfirmarPass.TextChanged += new EventHandler(VerificarCampos);
+            // Llamamos a la función de verificación al iniciar para manejar estado inicial
+            VerificarCampos(null, null);
 
+
+
+
+        }
+        private void VerificarCampos(object sender, EventArgs e)
+        {
+            // Si ambos campos tienen texto, habilitar el botón; de lo contrario, deshabilitar
+            btnCambiarPass.Enabled = !string.IsNullOrWhiteSpace(txbUsuario.Text) &&
+                               !string.IsNullOrWhiteSpace(txbActual.Text) &&
+                               !string.IsNullOrWhiteSpace(txbNPass.Text) &&
+                               !string.IsNullOrWhiteSpace(txbConfirmarPass.Text);
+        }
+        private void AvanzarConEnter(object sender, KeyEventArgs e)
+        {
+            // Verificar si la tecla presionada es Enter
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Evita el comportamiento por defecto de Enter
+                this.SelectNextControl((Control)sender, true, true, true, true); // Moverse al siguiente control
+            }
         }
 
         private void btnCambiarPass_Click(object sender, EventArgs e)
@@ -132,6 +166,11 @@ namespace Drogueria_proyecto.SecurityPassword
             SecurityForm SF = new SecurityForm();
             SF.Show();
             this.Close();
+        }
+
+        private void CambiarPassword_Load(object sender, EventArgs e)
+        {
+            txbUsuario.Focus();
         }
     }
 }
