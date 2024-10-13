@@ -202,11 +202,8 @@ namespace Drogueria_proyecto
 
         private void txt_gr_telprov_TextChanged(object sender, EventArgs e)
         {
-            if (validaciones.validarNumeros(txt_gr_telprov.Text, "El numero de telefono solo debe contener numeros"))
-            {
-                errorP_telprov_g.SetError(txt_gr_telprov, "El numero de telefono solo debe contener numeros");
-                txt_gr_telprov.Text = "";
-            }
+           
+
         }
 
         private void label5_Click(object sender, EventArgs e)

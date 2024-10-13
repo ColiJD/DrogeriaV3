@@ -41,6 +41,15 @@ namespace Drogueria_proyecto
 
             return false;
         }
+        public bool validarMinimoOchoCaracteres(String text, String msj)
+        {
+            if (text.Length >= 8)
+            {
+                return false; // Si tiene 8 o más caracteres, retorna true
+            }
+            return true; // Si tiene menos de 8 caracteres, retorna false
+        }
+      
 
         public bool validarprecio(String text, String msj)
         {
@@ -83,7 +92,7 @@ namespace Drogueria_proyecto
 
             foreach (Char letra in text)
             {
-                if (Regex.IsMatch(letra.ToString(), "^[1-5]") == false)
+                if (Regex.IsMatch(letra.ToString(), "^[0-9]") == false)
                 {
                     return true;
                 }
@@ -157,6 +166,6 @@ namespace Drogueria_proyecto
             return false;
         }
 
-
     }
+
 }

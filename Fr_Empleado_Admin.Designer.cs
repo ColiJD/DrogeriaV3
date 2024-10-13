@@ -215,7 +215,7 @@ namespace Drogueria_proyecto
             // 
             this.txt_usuaempl_gr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_usuaempl_gr.Location = new System.Drawing.Point(61, 140);
-            this.txt_usuaempl_gr.MaxLength = 60;
+            this.txt_usuaempl_gr.MaxLength = 35;
             this.txt_usuaempl_gr.Multiline = true;
             this.txt_usuaempl_gr.Name = "txt_usuaempl_gr";
             this.txt_usuaempl_gr.Size = new System.Drawing.Size(263, 24);
@@ -228,7 +228,7 @@ namespace Drogueria_proyecto
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_nomempl_gr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_nomempl_gr.Location = new System.Drawing.Point(424, 63);
-            this.txt_nomempl_gr.MaxLength = 60;
+            this.txt_nomempl_gr.MaxLength = 35;
             this.txt_nomempl_gr.Multiline = true;
             this.txt_nomempl_gr.Name = "txt_nomempl_gr";
             this.txt_nomempl_gr.Size = new System.Drawing.Size(263, 24);
@@ -294,7 +294,7 @@ namespace Drogueria_proyecto
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_pas_ad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_pas_ad.Location = new System.Drawing.Point(424, 140);
-            this.txt_pas_ad.MaxLength = 60;
+            this.txt_pas_ad.MaxLength = 35;
             this.txt_pas_ad.Multiline = true;
             this.txt_pas_ad.Name = "txt_pas_ad";
             this.txt_pas_ad.Size = new System.Drawing.Size(263, 24);
@@ -349,6 +349,7 @@ namespace Drogueria_proyecto
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_correoempl_gr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_correoempl_gr.Location = new System.Drawing.Point(424, 223);
+            this.txt_correoempl_gr.MaxLength = 45;
             this.txt_correoempl_gr.Multiline = true;
             this.txt_correoempl_gr.Name = "txt_correoempl_gr";
             this.txt_correoempl_gr.Size = new System.Drawing.Size(263, 24);

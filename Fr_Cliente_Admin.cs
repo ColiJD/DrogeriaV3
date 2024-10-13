@@ -30,17 +30,7 @@ namespace Drogueria_proyecto
         {
             // TODO: esta línea de código carga datos en la tabla 'dROGUERIADataSet1.Cliente' Puede moverla o quitarla según sea necesario.
             this.clienteTableAdapter.Fill(this.dROGUERIADataSet1.Cliente);
-            //cls_Conexion BD = new cls_Conexion();
-            //BD.abrir();
 
-            //SqlCommand cmd = new SqlCommand("SELECT * FROM Cliente", BD.sconexion);
-
-
-            //SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            //DataTable dt = new DataTable();
-            //sda.Fill(dt);
-            //dtg_administrador_empleado.DataSource = dt;
-            //BD.cerrar();
         }
 
 
@@ -60,20 +50,32 @@ namespace Drogueria_proyecto
         Class1 validaciones = new Class1();
         private void txt_gr_telclien_TextChanged_1(object sender, EventArgs e)
         {
-            if(validaciones.validarNumeros(txt_gr_telclien.Text,"El numero de telefono solo debe contener numeros"))
+            if (validaciones.validarMinimoOchoCaracteres(txt_gr_telclien.Text, "Ingrese minimo 8 caracteres"))
             {
-                errorP_telcl_ad.SetError(txt_gr_telclien, "El numero de telefono solo debe contener numeros");
+               // errorP_telcl_ad.SetError(txt_gr_telclien, "Ingrese minimo 8 caracteres");
+                
+            }
+            if ((validaciones.validarMinimoOchoCaracteres(txt_gr_telclien.Text, "Ingrese minimo 8 caracteres") &&
+                (validaciones.validarNumeros(txt_gr_telclien.Text, "La direccion solo debe contener  numeros"))))
+            {
+                errorP_telcl_ad.SetError(txt_gr_telclien, "La direccion solo debe contener numeros");
                 txt_gr_telclien.Text = "";
             }
+            
+
+
         }
 
         private void txt_gr_dirclien_TextChanged_1(object sender, EventArgs e)
+
         {
             if (validaciones.validarLetrasyNumeros(txt_gr_dirclien.Text, "La direccion solo debe contener letras y numeros"))
             {
                 errorP_dircl_ad.SetError(txt_gr_dirclien, "La direccion solo debe contener letras y numeros");
                 txt_gr_dirclien.Text = "";
             }
+           
+            
         }
 
         private void txt_gr_correoclien_TextChanged_1(object sender, EventArgs e)
@@ -107,23 +109,33 @@ namespace Drogueria_proyecto
 
                         cls_Conexion BD = new cls_Conexion();
                         BD.abrir();
+                    if (txt_gr_telclien.Text.Length >= 8)
+                    {
                         SqlCommand agregar = new SqlCommand("insert into Cliente values (@nombre_cliente,@direccion_cliente, @correo_cliente,@telefono_cliente)", BD.sconexion);
                         agregar.Parameters.AddWithValue("@nombre_cliente", txt_nombclien_gr.Text);
                         agregar.Parameters.AddWithValue("@correo_cliente", txt_gr_correoclien.Text);
                         agregar.Parameters.AddWithValue("@direccion_cliente", txt_gr_dirclien.Text);
                         agregar.Parameters.AddWithValue("@telefono_cliente", txt_gr_telclien.Text);
-
-
                         agregar.ExecuteNonQuery();
+
                         BD.cerrar();
                         txt_idcliente_gr.Clear();
                         txt_nombclien_gr.Clear();
                         txt_gr_correoclien.Clear();
                         txt_gr_dirclien.Clear();
                         txt_gr_telclien.Clear();
+                    }
+                    else { MessageBox.Show("Error telefono invalido"); }
+
+                    txt_gr_telclien.Clear();
 
 
-                        this.txt_idcliente_gr.Focus();
+
+
+
+
+
+                    this.txt_idcliente_gr.Focus();
                         cls_Conexion clsConexion1 = new cls_Conexion();
                         clsConexion1.cargarDatos(dtg_administrador_empleado, "Cliente");
                     }
@@ -227,6 +239,11 @@ namespace Drogueria_proyecto
         }
 
         private void dtg_administrador_empleado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

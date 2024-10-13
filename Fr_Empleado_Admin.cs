@@ -95,6 +95,7 @@ namespace Drogueria_proyecto
 
 
 
+
                     this.txt_nomempl_gr.Focus();
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dtg_administrador_empleado, "Empleado");
@@ -151,7 +152,7 @@ namespace Drogueria_proyecto
             }
             catch
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                
             }
         }
 

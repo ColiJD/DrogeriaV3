@@ -36,7 +36,6 @@ namespace Drogueria_proyecto
             this.txt_desinv_ad = new System.Windows.Forms.TextBox();
             this.txt_provinv_ad = new System.Windows.Forms.TextBox();
             this.txt_Nom_ad = new System.Windows.Forms.TextBox();
-            this.txt_catinv_ad = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -72,6 +71,7 @@ namespace Drogueria_proyecto
             this.label16 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.txt_catinv_ad = new System.Windows.Forms.TextBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_prod_ad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource1)).BeginInit();
@@ -93,7 +93,7 @@ namespace Drogueria_proyecto
             // 
             this.txt_codinv_ad.Enabled = false;
             this.txt_codinv_ad.Location = new System.Drawing.Point(86, 46);
-            this.txt_codinv_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_codinv_ad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_codinv_ad.Multiline = true;
             this.txt_codinv_ad.Name = "txt_codinv_ad";
             this.txt_codinv_ad.Size = new System.Drawing.Size(263, 24);
@@ -103,7 +103,7 @@ namespace Drogueria_proyecto
             // txt_exisinv_ad
             // 
             this.txt_exisinv_ad.Location = new System.Drawing.Point(84, 192);
-            this.txt_exisinv_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_exisinv_ad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_exisinv_ad.Multiline = true;
             this.txt_exisinv_ad.Name = "txt_exisinv_ad";
             this.txt_exisinv_ad.Size = new System.Drawing.Size(263, 24);
@@ -115,7 +115,7 @@ namespace Drogueria_proyecto
             this.txt_desinv_ad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_desinv_ad.Location = new System.Drawing.Point(434, 115);
-            this.txt_desinv_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_desinv_ad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_desinv_ad.MaxLength = 60;
             this.txt_desinv_ad.Multiline = true;
             this.txt_desinv_ad.Name = "txt_desinv_ad";
@@ -129,7 +129,7 @@ namespace Drogueria_proyecto
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_provinv_ad.Enabled = false;
             this.txt_provinv_ad.Location = new System.Drawing.Point(434, 192);
-            this.txt_provinv_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_provinv_ad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_provinv_ad.Multiline = true;
             this.txt_provinv_ad.Name = "txt_provinv_ad";
             this.txt_provinv_ad.Size = new System.Drawing.Size(263, 24);
@@ -140,24 +140,13 @@ namespace Drogueria_proyecto
             this.txt_Nom_ad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_Nom_ad.Location = new System.Drawing.Point(434, 46);
-            this.txt_Nom_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_Nom_ad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Nom_ad.MaxLength = 80;
             this.txt_Nom_ad.Multiline = true;
             this.txt_Nom_ad.Name = "txt_Nom_ad";
             this.txt_Nom_ad.Size = new System.Drawing.Size(263, 24);
             this.txt_Nom_ad.TabIndex = 19;
             this.txt_Nom_ad.TextChanged += new System.EventHandler(this.txt_Nom_ad_TextChanged);
-            // 
-            // txt_catinv_ad
-            // 
-            this.txt_catinv_ad.Location = new System.Drawing.Point(86, 115);
-            this.txt_catinv_ad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_catinv_ad.MaxLength = 1;
-            this.txt_catinv_ad.Multiline = true;
-            this.txt_catinv_ad.Name = "txt_catinv_ad";
-            this.txt_catinv_ad.Size = new System.Drawing.Size(263, 24);
-            this.txt_catinv_ad.TabIndex = 20;
-            this.txt_catinv_ad.TextChanged += new System.EventHandler(this.txt_catinv_ad_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -196,9 +185,9 @@ namespace Drogueria_proyecto
             this.btnBuscarad.ForeColor = System.Drawing.Color.White;
             this.btnBuscarad.Location = new System.Drawing.Point(84, 0);
             this.btnBuscarad.Name = "btnBuscarad";
-            this.btnBuscarad.Size = new System.Drawing.Size(135, 49);
+            this.btnBuscarad.Size = new System.Drawing.Size(190, 49);
             this.btnBuscarad.TabIndex = 28;
-            this.btnBuscarad.Text = "Buscar";
+            this.btnBuscarad.Text = "Buscar Proveedor";
             this.btnBuscarad.UseVisualStyleBackColor = false;
             this.btnBuscarad.Click += new System.EventHandler(this.btnBuscarad_Click);
             // 
@@ -456,6 +445,7 @@ namespace Drogueria_proyecto
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.txt_catinv_ad);
             this.panel5.Controls.Add(this.label10);
             this.panel5.Controls.Add(this.txt_codinv_ad);
             this.panel5.Controls.Add(this.textBox8);
@@ -464,7 +454,6 @@ namespace Drogueria_proyecto
             this.panel5.Controls.Add(this.txt_desinv_ad);
             this.panel5.Controls.Add(this.txt_provinv_ad);
             this.panel5.Controls.Add(this.txt_Nom_ad);
-            this.panel5.Controls.Add(this.txt_catinv_ad);
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.label14);
             this.panel5.Controls.Add(this.label3);
@@ -475,6 +464,16 @@ namespace Drogueria_proyecto
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(784, 300);
             this.panel5.TabIndex = 36;
+            // 
+            // txt_catinv_ad
+            // 
+            this.txt_catinv_ad.Location = new System.Drawing.Point(86, 115);
+            this.txt_catinv_ad.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_catinv_ad.Multiline = true;
+            this.txt_catinv_ad.Name = "txt_catinv_ad";
+            this.txt_catinv_ad.Size = new System.Drawing.Size(263, 24);
+            this.txt_catinv_ad.TabIndex = 34;
+            this.txt_catinv_ad.TextChanged += new System.EventHandler(this.txt_catinv_ad_TextChanged_2);
             // 
             // guna2Panel1
             // 
@@ -498,7 +497,7 @@ namespace Drogueria_proyecto
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.dgv_prod_ad);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "fr_Producto_Admin";
             this.Text = "Producto_Ad";
@@ -528,7 +527,6 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.TextBox txt_exisinv_ad;
         private System.Windows.Forms.TextBox txt_desinv_ad;
         private System.Windows.Forms.TextBox txt_Nom_ad;
-        private System.Windows.Forms.TextBox txt_catinv_ad;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -566,5 +564,6 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private System.Windows.Forms.TextBox txt_catinv_ad;
     }
 }

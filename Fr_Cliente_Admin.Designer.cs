@@ -206,6 +206,7 @@ namespace Drogueria_proyecto
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(784, 273);
             this.guna2Panel1.TabIndex = 17;
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // txt_idcliente_gr
             // 
@@ -254,7 +255,7 @@ namespace Drogueria_proyecto
             this.txt_nombclien_gr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_nombclien_gr.Location = new System.Drawing.Point(405, 53);
             this.txt_nombclien_gr.Margin = new System.Windows.Forms.Padding(1);
-            this.txt_nombclien_gr.MaxLength = 80;
+            this.txt_nombclien_gr.MaxLength = 35;
             this.txt_nombclien_gr.Multiline = true;
             this.txt_nombclien_gr.Name = "txt_nombclien_gr";
             this.txt_nombclien_gr.Size = new System.Drawing.Size(263, 24);
@@ -282,7 +283,7 @@ namespace Drogueria_proyecto
             this.txt_gr_correoclien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_gr_correoclien.Location = new System.Drawing.Point(405, 139);
             this.txt_gr_correoclien.Margin = new System.Windows.Forms.Padding(1);
-            this.txt_gr_correoclien.MaxLength = 60;
+            this.txt_gr_correoclien.MaxLength = 35;
             this.txt_gr_correoclien.Multiline = true;
             this.txt_gr_correoclien.Name = "txt_gr_correoclien";
             this.txt_gr_correoclien.Size = new System.Drawing.Size(263, 24);

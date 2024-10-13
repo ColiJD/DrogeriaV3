@@ -316,6 +316,8 @@ namespace Drogueria_proyecto
             this.cboxEmp.Name = "cboxEmp";
             this.cboxEmp.Size = new System.Drawing.Size(263, 28);
             this.cboxEmp.TabIndex = 33;
+            this.cboxEmp.SelectedIndexChanged += new System.EventHandler(this.cboxEmp_SelectedIndexChanged);
+            this.cboxEmp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboxEmp_KeyPress);
             // 
             // cboxCliente
             // 
@@ -327,6 +329,7 @@ namespace Drogueria_proyecto
             this.cboxCliente.Name = "cboxCliente";
             this.cboxCliente.Size = new System.Drawing.Size(263, 28);
             this.cboxCliente.TabIndex = 34;
+            this.cboxCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboxCliente_KeyPress);
             // 
             // txtCantidad
             // 
@@ -336,6 +339,7 @@ namespace Drogueria_proyecto
             this.txtCantidad.Size = new System.Drawing.Size(263, 26);
             this.txtCantidad.TabIndex = 36;
             this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // txtFactura
             // 
@@ -352,6 +356,7 @@ namespace Drogueria_proyecto
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(263, 26);
             this.txtPrecio.TabIndex = 38;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             // 
             // txtIDP
             // 
@@ -360,6 +365,7 @@ namespace Drogueria_proyecto
             this.txtIDP.Size = new System.Drawing.Size(30, 26);
             this.txtIDP.TabIndex = 39;
             this.txtIDP.TextChanged += new System.EventHandler(this.txtIDP_TextChanged);
+            this.txtIDP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDP_KeyPress);
             // 
             // txtProducto
             // 
@@ -508,6 +514,7 @@ namespace Drogueria_proyecto
             this.dgvFactura.TabIndex = 51;
             this.dgvFactura.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactura_CellContentClick);
             this.dgvFactura.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactura_CellContentDoubleClick);
+            this.dgvFactura.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactura_CellDoubleClick);
             // 
             // printDocument1
             // 
@@ -550,6 +557,7 @@ namespace Drogueria_proyecto
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(784, 349);
             this.guna2Panel1.TabIndex = 52;
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // guna2Panel2
             // 

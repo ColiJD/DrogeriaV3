@@ -163,6 +163,7 @@ namespace Drogueria_proyecto
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (txt_exisinv_ad.Text == string.Empty || txt_catinv_ad.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
@@ -233,12 +234,8 @@ namespace Drogueria_proyecto
 
         private void txt_catinv_ad_TextChanged(object sender, EventArgs e)
         {
-            if (validaciones.validarcatgopro(txt_catinv_ad.Text, "La categoría solo permite números del 1-5"))
-            {
-                errorP_catpro_ad.SetError(txt_catinv_ad, "La categoria solo permite numeros del 1-5");
-                txt_catinv_ad.Text = "";
 
-            }
+           
         }
 
         private void txt_exisinv_ad_TextChanged(object sender, EventArgs e)
@@ -278,6 +275,26 @@ namespace Drogueria_proyecto
         private void dgv_prod_ad_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txt_catinv_ad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_catinv_ad_TextChanged_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txt_catinv_ad_TextChanged_2(object sender, EventArgs e)
+        {
+            if (validaciones.validarNumeros(txt_catinv_ad.Text, "La existencia solo debe contener números"))
+            {
+                errorP_existpro_ad.SetError(txt_catinv_ad, " La existencia solo debe contener numeros");
+                txt_catinv_ad.Text = "";
+
+            }
         }
     }
 }
