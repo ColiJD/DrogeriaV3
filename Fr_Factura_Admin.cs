@@ -237,6 +237,7 @@ namespace Drogueria_proyecto
                     agregar.Parameters.AddWithValue("@total", txtTotal.Text);
 
                     agregar.ExecuteNonQuery();
+                    MessageBox.Show("Aviso ... Los Datos se agregaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
                     txtIDP.Clear();
@@ -312,6 +313,7 @@ namespace Drogueria_proyecto
 
 
                     modificar.ExecuteNonQuery();
+                    MessageBox.Show("Aviso ... Los Datos se modificaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
                     txtIDP.Clear();
@@ -374,6 +376,7 @@ namespace Drogueria_proyecto
 
 
                     eliminar.ExecuteNonQuery();
+                    MessageBox.Show("Aviso ... Los Datos se eliminaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
                     txtIDP.Clear();

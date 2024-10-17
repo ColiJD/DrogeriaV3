@@ -65,95 +65,157 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_tipoempl_gr.Text == string.Empty || txt_usuaempl_gr.Text == string.Empty  || txt_nomempl_gr.Text == string.Empty || txt_pas_ad.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_tipoempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_usuaempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_nomempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_pas_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_correoempl_gr.Text))
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand agregar = new SqlCommand("insert into Empleado values ( @nombre_empleado ,@username,@password ,@codigo_tipo,@correo )", BD.sconexion);
-                    agregar.Parameters.AddWithValue("@password",txt_pas_ad.Text);
-                    agregar.Parameters.AddWithValue("@nombre_empleado", txt_nomempl_gr.Text);
-                    agregar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
-                    agregar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text); 
-                    agregar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
 
+                    // Verificar si el username o el correo ya existen en la base de datos
+                    SqlCommand verificar = new SqlCommand("SELECT COUNT(*) FROM Empleado WHERE username = @username OR correo = @correo", BD.sconexion);
+                    verificar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
+                    verificar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
 
+                    int count = (int)verificar.ExecuteScalar();
 
-                    agregar.ExecuteNonQuery();
+                    if (count > 0)
+                    {
+                        // Si el username o el correo ya existen, mostramos un mensaje de error
+                        MessageBox.Show("Error... El usuario o el correo ya existen en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // Si no existen duplicados, procedemos con la inserción
+                        SqlCommand agregar = new SqlCommand("INSERT INTO Empleado (nombre_empleado, username, password, codigo_tipo, correo) VALUES (@nombre_empleado, @username, @password, @codigo_tipo, @correo)", BD.sconexion);
+                        agregar.Parameters.AddWithValue("@nombre_empleado", txt_nomempl_gr.Text);
+                        agregar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
+                        agregar.Parameters.AddWithValue("@password", txt_pas_ad.Text);
+                        agregar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text);
+                        agregar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
+
+                        agregar.ExecuteNonQuery();
+
+                        // Limpiamos los campos y mostramos un mensaje de éxito
+                        txt_tipoempl_gr.Clear();
+                        txt_usuaempl_gr.Clear();
+                        txt_idEmpleado_gr.Clear();
+                        txt_nomempl_gr.Clear();
+                        txt_pas_ad.Clear();
+                        txt_correoempl_gr.Clear();
+
+                        MessageBox.Show("Datos Agregados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Recargar datos en la tabla
+                        cls_Conexion clsConexion1 = new cls_Conexion();
+                        clsConexion1.cargarDatos(dtg_administrador_empleado, "Empleado");
+                    }
+
                     BD.cerrar();
-                    txt_tipoempl_gr.Clear();
-                    txt_usuaempl_gr.Clear();
-                    txt_idEmpleado_gr.Clear();
-                    txt_nomempl_gr.Clear();
-                    txt_pas_ad.Clear();
-                    txt_correoempl_gr.Clear();
-
-
-
-
-
                     this.txt_nomempl_gr.Focus();
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dtg_administrador_empleado, "Empleado");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            errorP_nombemp_ad.Clear();
-            errorP_pas_ad.Clear();
-            errorP_tipempl_ad.Clear();
-            errorP_usu_ad.Clear();
-            errorP_correoempl_ad.Clear();
+            finally
+            {
+                // Limpiar los errores de validación en los campos
+                errorP_nombemp_ad.Clear();
+                errorP_pas_ad.Clear();
+                errorP_tipempl_ad.Clear();
+                errorP_usu_ad.Clear();
+                errorP_correoempl_ad.Clear();
+            }
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (txt_tipoempl_gr.Text == string.Empty || txt_usuaempl_gr.Text == string.Empty || txt_nomempl_gr.Text == string.Empty || txt_pas_ad.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_tipoempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_usuaempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_nomempl_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_pas_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_correoempl_gr.Text))
                 {
                     MessageBox.Show("Error... No puede modificar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand modificar = new SqlCommand("update Empleado set nombre_empleado=@nombre_empleado,username=@username,password=@password," +
-                        "codigo_tipo=@codigo_tipo where codigo_empleado=@codigo_empleado", BD.sconexion);
-                    modificar.Parameters.AddWithValue("@codigo_empleado", txt_idEmpleado_gr.Text);
-                    modificar.Parameters.AddWithValue("@nombre_empleado", txt_nomempl_gr.Text);
-                    modificar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
-                    modificar.Parameters.AddWithValue("@password", txt_pas_ad.Text);
-                    modificar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text);
 
+                    // Verificar si el username o correo ya están en uso por otro empleado
+                    SqlCommand verificar = new SqlCommand("SELECT COUNT(*) FROM Empleado WHERE (username = @username OR correo = @correo) AND codigo_empleado != @codigo_empleado", BD.sconexion);
+                    verificar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
+                    verificar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
+                    verificar.Parameters.AddWithValue("@codigo_empleado", txt_idEmpleado_gr.Text);
 
-                    modificar.ExecuteNonQuery();
+                    int count = (int)verificar.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        // Si el username o el correo ya están en uso, mostramos un mensaje de error
+                        MessageBox.Show("Error... El usuario o el correo ya están en uso por otro empleado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // Si no hay duplicados, procedemos con la modificación
+                        SqlCommand modificar = new SqlCommand("UPDATE Empleado SET nombre_empleado=@nombre_empleado, username=@username, password=@password, correo=@correo, codigo_tipo=@codigo_tipo WHERE codigo_empleado=@codigo_empleado", BD.sconexion);
+                        modificar.Parameters.AddWithValue("@codigo_empleado", txt_idEmpleado_gr.Text);
+                        modificar.Parameters.AddWithValue("@nombre_empleado", txt_nomempl_gr.Text);
+                        modificar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
+                        modificar.Parameters.AddWithValue("@password", txt_pas_ad.Text);
+                        modificar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
+                        modificar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text);
+
+                        modificar.ExecuteNonQuery();
+
+                        // Limpiar campos y mostrar mensaje de éxito
+                        txt_idEmpleado_gr.Clear();
+                        txt_nomempl_gr.Clear();
+                        txt_tipoempl_gr.Clear();
+                        txt_usuaempl_gr.Clear();
+                        txt_pas_ad.Clear();
+                        txt_correoempl_gr.Clear();
+
+                        MessageBox.Show("Datos Modificados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Recargar datos en la tabla
+                        cls_Conexion clsConexion1 = new cls_Conexion();
+                        clsConexion1.cargarDatos(dtg_administrador_empleado, "Empleado");
+                    }
+
                     BD.cerrar();
-                    txt_idEmpleado_gr.Clear();
-                    txt_nomempl_gr.Clear();
-                    txt_tipoempl_gr.Clear();
-                    txt_usuaempl_gr.Clear();
-                    txt_pas_ad.Clear();
-                    errorP_correoempl_ad.Clear();
-
-
-
                     this.txt_nomempl_gr.Focus();
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dtg_administrador_empleado, "Empleado");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                // Limpiar los errores de validación en los campos
+                errorP_nombemp_ad.Clear();
+                errorP_pas_ad.Clear();
+                errorP_tipempl_ad.Clear();
+                errorP_usu_ad.Clear();
+                errorP_correoempl_ad.Clear();
+            }
+
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -175,6 +237,7 @@ namespace Drogueria_proyecto
 
 
                     eliminar.ExecuteNonQuery();
+                    MessageBox.Show("Aviso... Se eliminaron los datos con exito", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     txt_idEmpleado_gr.Clear();
                     txt_nomempl_gr.Clear();

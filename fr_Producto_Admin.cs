@@ -66,99 +66,152 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if(txt_exisinv_ad.Text == string.Empty || txt_catinv_ad.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
+                if (string.IsNullOrWhiteSpace(txt_exisinv_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_catinv_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_desinv_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_Nom_ad.Text) ||
+                    string.IsNullOrWhiteSpace(txt_provinv_ad.Text))
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand agregar = new SqlCommand("insert into Producto values (@nombre_producto, @descripcion_producto ,@categoria_producto, @proveedor_producto, " +
-                        "@existencia, @precio_producto)", BD.sconexion);
-                    agregar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
-                    agregar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
-                    agregar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
-                    agregar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
-                    agregar.Parameters.AddWithValue("@existencia", txt_exisinv_ad.Text);
-                    agregar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
 
+                    // Verificar si el nombre del producto ya existe en la base de datos
+                    SqlCommand verificar = new SqlCommand("SELECT COUNT(*) FROM Producto WHERE nombre_producto = @nombre_producto", BD.sconexion);
+                    verificar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
 
-                    agregar.ExecuteNonQuery();
+                    int count = (int)verificar.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        // Si el nombre ya existe, mostramos un mensaje de error
+                        MessageBox.Show("Error... El nombre del producto ya existe en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // Si no existe, se procede a insertar el producto
+                        SqlCommand agregar = new SqlCommand("INSERT INTO Producto (nombre_producto, descripcion_producto, categoria_producto, proveedor_producto, existencia_producto, precio_producto) " +
+                                                            "VALUES (@nombre_producto, @descripcion_producto, @categoria_producto, @proveedor_producto, @existencia_producto, @precio_producto)", BD.sconexion);
+                        agregar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
+                        agregar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
+                        agregar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
+                        agregar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
+                        agregar.Parameters.AddWithValue("@existencia_producto", txt_exisinv_ad.Text); // Asegúrate de que esto coincida con el nombre en la base de datos
+                        agregar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
+
+                        agregar.ExecuteNonQuery();
+                        MessageBox.Show("Aviso ... Los Datos se agregaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Limpiar los campos después de la inserción
+                        txt_codinv_ad.Clear();
+                        txt_exisinv_ad.Clear();
+                        txt_catinv_ad.Clear();
+                        txt_desinv_ad.Clear();
+                        txt_Nom_ad.Clear();
+                        txt_provinv_ad.Clear();
+                        textBox8.Clear();
+
+                        this.txt_Nom_ad.Focus();
+
+                        // Actualizar la tabla de productos
+                        cls_Conexion clsConexion1 = new cls_Conexion();
+                        clsConexion1.cargarDatos(dgv_prod_ad, "Producto");
+                    }
+
                     BD.cerrar();
-                    txt_codinv_ad.Clear();
-                    txt_exisinv_ad.Clear();
-                    txt_catinv_ad.Clear();
-                    txt_desinv_ad.Clear();
-                    txt_Nom_ad.Clear();
-                    txt_provinv_ad.Clear();
-                    textBox8.Clear();
-
-                    this.txt_Nom_ad.Focus();
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dgv_prod_ad, "Producto");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                errorP_catpro_ad.Clear();
+                errorP_despro_ad.Clear();
+                errorP_existpro_ad.Clear();
+                errorP_nombpro_ad.Clear();
             }
 
-            errorP_catpro_ad.Clear();
-            errorP_despro_ad.Clear();
-            errorP_existpro_ad.Clear();
-            errorP_nombpro_ad.Clear();
+
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-             try
-                {
+            try
+            {
                 if (txt_exisinv_ad.Text == string.Empty || txt_catinv_ad.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede modificar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand modificar = new SqlCommand("update Producto set nombre_producto=@nombre_producto,descripcion_producto=@descripcion_producto,categoria_producto=@categoria_producto," +
-                    "proveedor_producto=@proveedor_producto, existencia_producto=@existencia, precio_producto=@precio_producto where codigo_producto=@codigo_producto", BD.sconexion);
-                    modificar.Parameters.AddWithValue("@codigo_producto", txt_codinv_ad.Text);
-                    modificar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
-                    modificar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
-                    modificar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
-                    modificar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
-                    modificar.Parameters.AddWithValue("@existencia", txt_exisinv_ad.Text);
-                    modificar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
-                   
 
+                    // Verificar si el nombre del producto ya existe para otro registro
+                    SqlCommand verificar = new SqlCommand("SELECT COUNT(*) FROM Producto WHERE nombre_producto = @nombre_producto AND codigo_producto != @codigo_producto", BD.sconexion);
+                    verificar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
+                    verificar.Parameters.AddWithValue("@codigo_producto", txt_codinv_ad.Text);
 
-                    modificar.ExecuteNonQuery();
+                    int count = (int)verificar.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        // Si el nombre ya está en uso por otro producto, mostramos un mensaje de error
+                        MessageBox.Show("Error... El nombre del producto ya existe en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // Si no hay duplicados, procedemos con la modificación
+                        SqlCommand modificar = new SqlCommand("UPDATE Producto SET nombre_producto=@nombre_producto, descripcion_producto=@descripcion_producto, categoria_producto=@categoria_producto, " +
+                            "proveedor_producto=@proveedor_producto, existencia_producto=@existencia, precio_producto=@precio_producto WHERE codigo_producto=@codigo_producto", BD.sconexion);
+                        modificar.Parameters.AddWithValue("@codigo_producto", txt_codinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
+                        modificar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@existencia", txt_exisinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
+
+                        modificar.ExecuteNonQuery();
+                        MessageBox.Show("Aviso ... Los Datos se modificaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Limpiar los campos después de la modificación
+                        txt_codinv_ad.Clear();
+                        txt_exisinv_ad.Clear();
+                        txt_catinv_ad.Clear();
+                        txt_desinv_ad.Clear();
+                        txt_Nom_ad.Clear();
+                        txt_provinv_ad.Clear();
+                        textBox8.Clear();
+
+                        this.txt_Nom_ad.Focus();
+
+                        // Actualizar la tabla de productos
+                        cls_Conexion clsConexion1 = new cls_Conexion();
+                        clsConexion1.cargarDatos(dgv_prod_ad, "Producto");
+                    }
+
                     BD.cerrar();
-                    txt_codinv_ad.Clear();
-                    txt_exisinv_ad.Clear();
-                    txt_catinv_ad.Clear();
-                    txt_desinv_ad.Clear();
-                    txt_Nom_ad.Clear();
-                    txt_provinv_ad.Clear();
-                    textBox8.Clear();
-
-                    this.txt_Nom_ad.Focus();
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dgv_prod_ad, "Producto");
                 }
-             }
-            catch
-               {
-                 MessageBox.Show("Error...El codigo ya existe en la base de datos");
-               }
-            errorP_catpro_ad.Clear();
-            errorP_despro_ad.Clear();
-            errorP_existpro_ad.Clear();
-            errorP_nombpro_ad.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                errorP_catpro_ad.Clear();
+                errorP_despro_ad.Clear();
+                errorP_existpro_ad.Clear();
+                errorP_nombpro_ad.Clear();
+            }
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -180,6 +233,7 @@ namespace Drogueria_proyecto
 
 
                     eliminar.ExecuteNonQuery();
+                    MessageBox.Show("Aviso ... Los Datos se eliminaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     txt_codinv_ad.Clear();
                     txt_exisinv_ad.Clear();

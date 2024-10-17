@@ -57,12 +57,13 @@ namespace Drogueria_proyecto
             var user = new NrecuperarPassword();
             var result = user.recoverPassword(txbCorreo.Text);
             MessageBox.Show(result, "Resultado de la Recuperación de Contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            txbCorreo.Text = "";
         }
 
         private void btnCambiar_Click(object sender, EventArgs e)
         {
             CambiarPassword CP = new CambiarPassword();
+            txbCorreo.Text = "";
             CP.Show();
             this.Hide();
         }

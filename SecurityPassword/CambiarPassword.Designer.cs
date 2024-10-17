@@ -141,9 +141,10 @@ namespace Drogueria_proyecto.SecurityPassword
             this.label1.Location = new System.Drawing.Point(32, 307);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 29);
+            this.label1.Size = new System.Drawing.Size(267, 29);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Nueva Contraseña";
+            this.label1.Text = "Confirmar Contraseña";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txbConfirmarPass
             // 

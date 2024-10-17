@@ -90,6 +90,11 @@ namespace Drogueria_proyecto.SecurityPassword
             {
                 MessageBox.Show("El usuario o la contraseña actual son incorrectos.");
             }
+
+            txbActual.Text = "";
+            txbConfirmarPass.Text = "";
+            txbNPass.Text = "";
+            txbUsuario.Text = "";
         }
 
         private bool VerificarUsuario(string username, string password)
@@ -171,6 +176,11 @@ namespace Drogueria_proyecto.SecurityPassword
         private void CambiarPassword_Load(object sender, EventArgs e)
         {
             txbUsuario.Focus();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
