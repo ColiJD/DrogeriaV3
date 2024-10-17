@@ -222,5 +222,12 @@ namespace Drogueria_proyecto
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+
+            ActivateButton(sender, RGBColors.colorTxtWhile);
+            OpenChildForm(new Fr_gerente_proveedores());
+        }
     }
     }

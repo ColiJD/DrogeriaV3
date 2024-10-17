@@ -59,6 +59,7 @@ namespace Drogueria_proyecto
             this.errorP_telprov_g = new System.Windows.Forms.ErrorProvider(this.components);
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.proveedorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dROGUERIADataSet7)).BeginInit();
@@ -67,6 +68,7 @@ namespace Drogueria_proyecto
             ((System.ComponentModel.ISupportInitialize)(this.errorP_telprov_g)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_gr_telprov
@@ -80,6 +82,7 @@ namespace Drogueria_proyecto
             this.txt_gr_telprov.Size = new System.Drawing.Size(263, 24);
             this.txt_gr_telprov.TabIndex = 32;
             this.txt_gr_telprov.TextChanged += new System.EventHandler(this.txt_gr_telprov_TextChanged);
+            this.txt_gr_telprov.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_gr_telprov_KeyPress);
             // 
             // label8
             // 
@@ -105,6 +108,7 @@ namespace Drogueria_proyecto
             this.txt_gr_corprov.Name = "txt_gr_corprov";
             this.txt_gr_corprov.Size = new System.Drawing.Size(263, 24);
             this.txt_gr_corprov.TabIndex = 30;
+            this.txt_gr_corprov.TextChanged += new System.EventHandler(this.txt_gr_corprov_TextChanged);
             // 
             // label5
             // 
@@ -364,6 +368,7 @@ namespace Drogueria_proyecto
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(784, 273);
             this.guna2Panel1.TabIndex = 39;
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // guna2Panel2
             // 
@@ -375,6 +380,10 @@ namespace Drogueria_proyecto
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(784, 60);
             this.guna2Panel2.TabIndex = 40;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Fr_gerente_proveedores
             // 
@@ -402,6 +411,7 @@ namespace Drogueria_proyecto
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,7 +444,9 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.ErrorProvider errorP_nombprov_g;
         private System.Windows.Forms.ErrorProvider errorP_direcprov_g;
         private System.Windows.Forms.ErrorProvider errorP_telprov_g;
+        private System.Windows.Forms.ErrorProvider errorP_correoprov_g;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

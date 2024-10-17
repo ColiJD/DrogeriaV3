@@ -78,7 +78,7 @@ namespace Drogueria_proyecto
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(0, 0);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1058, 854);
+            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1058, 749);
             this.guna2CustomGradientPanel1.TabIndex = 0;
             // 
             // panelDesktop
@@ -91,7 +91,7 @@ namespace Drogueria_proyecto
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(300, 60);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(758, 794);
+            this.panelDesktop.Size = new System.Drawing.Size(758, 689);
             this.panelDesktop.TabIndex = 2;
             // 
             // labelfechag
@@ -101,7 +101,7 @@ namespace Drogueria_proyecto
             this.labelfechag.BackColor = System.Drawing.Color.Transparent;
             this.labelfechag.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelfechag.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.labelfechag.Location = new System.Drawing.Point(99, 390);
+            this.labelfechag.Location = new System.Drawing.Point(99, 337);
             this.labelfechag.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelfechag.Name = "labelfechag";
             this.labelfechag.Size = new System.Drawing.Size(109, 39);
@@ -115,7 +115,7 @@ namespace Drogueria_proyecto
             this.labelhorag.BackColor = System.Drawing.Color.Transparent;
             this.labelhorag.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelhorag.ForeColor = System.Drawing.Color.White;
-            this.labelhorag.Location = new System.Drawing.Point(101, 536);
+            this.labelhorag.Location = new System.Drawing.Point(101, 483);
             this.labelhorag.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelhorag.Name = "labelhorag";
             this.labelhorag.Size = new System.Drawing.Size(210, 73);
@@ -239,7 +239,7 @@ namespace Drogueria_proyecto
             this.PanelLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelLateral.Location = new System.Drawing.Point(0, 0);
             this.PanelLateral.Name = "PanelLateral";
-            this.PanelLateral.Size = new System.Drawing.Size(300, 854);
+            this.PanelLateral.Size = new System.Drawing.Size(300, 749);
             this.PanelLateral.TabIndex = 0;
             // 
             // PReportServices
@@ -418,7 +418,7 @@ namespace Drogueria_proyecto
             // 
             // fr_menu_gerente
             // 
-            this.ClientSize = new System.Drawing.Size(1058, 854);
+            this.ClientSize = new System.Drawing.Size(1058, 749);
             this.Controls.Add(this.guna2CustomGradientPanel1);
             this.Name = "fr_menu_gerente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

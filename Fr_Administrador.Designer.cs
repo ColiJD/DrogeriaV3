@@ -43,7 +43,6 @@ namespace Drogueria_proyecto
             this.BtnMinimizar = new FontAwesome.Sharp.IconButton();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconButton();
             this.PanelLateral = new Guna.UI2.WinForms.Guna2Panel();
-            this.PReportServices = new Guna.UI2.WinForms.Guna2Panel();
             this.BtnFacturas = new FontAwesome.Sharp.IconButton();
             this.button_menug_Empleados = new FontAwesome.Sharp.IconButton();
             this.button_menug_inv = new FontAwesome.Sharp.IconButton();
@@ -51,6 +50,7 @@ namespace Drogueria_proyecto
             this.PLogo = new Guna.UI2.WinForms.Guna2Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
             this.BtnInicio = new System.Windows.Forms.PictureBox();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             this.PanelTitulo.SuspendLayout();
@@ -229,7 +229,7 @@ namespace Drogueria_proyecto
             // 
             this.PanelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
             this.PanelLateral.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.PanelLateral.Controls.Add(this.PReportServices);
+            this.PanelLateral.Controls.Add(this.iconButton1);
             this.PanelLateral.Controls.Add(this.BtnFacturas);
             this.PanelLateral.Controls.Add(this.button_menug_Empleados);
             this.PanelLateral.Controls.Add(this.button_menug_inv);
@@ -240,15 +240,6 @@ namespace Drogueria_proyecto
             this.PanelLateral.Name = "PanelLateral";
             this.PanelLateral.Size = new System.Drawing.Size(300, 749);
             this.PanelLateral.TabIndex = 0;
-            // 
-            // PReportServices
-            // 
-            this.PReportServices.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PReportServices.Location = new System.Drawing.Point(0, 557);
-            this.PReportServices.Name = "PReportServices";
-            this.PReportServices.Size = new System.Drawing.Size(300, 240);
-            this.PReportServices.TabIndex = 5;
-            this.PReportServices.Visible = false;
             // 
             // BtnFacturas
             // 
@@ -388,6 +379,32 @@ namespace Drogueria_proyecto
             this.BtnInicio.TabStop = false;
             this.BtnInicio.Click += new System.EventHandler(this.BtnInicio_Click);
             // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(144)))), ((int)(((byte)(183)))));
+            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.iconButton1.FlatAppearance.BorderSize = 4;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.Color.White;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 32;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(0, 557);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.iconButton1.Size = new System.Drawing.Size(300, 80);
+            this.iconButton1.TabIndex = 5;
+            this.iconButton1.Text = "Proveedores";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
             // Fr_Administrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,7 +444,6 @@ namespace Drogueria_proyecto
         private FontAwesome.Sharp.IconButton BtnMinimizar;
         private FontAwesome.Sharp.IconButton iconCurrentChildForm;
         private Guna.UI2.WinForms.Guna2Panel PanelLateral;
-        private Guna.UI2.WinForms.Guna2Panel PReportServices;
         private FontAwesome.Sharp.IconButton BtnFacturas;
         private FontAwesome.Sharp.IconButton button_menug_Empleados;
         private FontAwesome.Sharp.IconButton button_menug_inv;
@@ -435,5 +451,6 @@ namespace Drogueria_proyecto
         private Guna.UI2.WinForms.Guna2Panel PLogo;
         private System.Windows.Forms.Label lbTitulo;
         private System.Windows.Forms.PictureBox BtnInicio;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }
