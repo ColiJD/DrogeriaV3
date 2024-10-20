@@ -399,12 +399,12 @@ namespace Drogueria_proyecto
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(302, 4);
+            this.button1.Location = new System.Drawing.Point(238, 4);
             this.button1.Margin = new System.Windows.Forms.Padding(1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 49);
+            this.button1.Size = new System.Drawing.Size(199, 49);
             this.button1.TabIndex = 28;
-            this.button1.Text = "Buscar";
+            this.button1.Text = "Buscar Proveedor";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

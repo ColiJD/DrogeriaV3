@@ -13,6 +13,7 @@ namespace Drogueria_proyecto
 {
     public partial class fr_Producto_Admin : Form
     {
+        private string categoria = "";
         public fr_Producto_Admin()
         {
             InitializeComponent();
@@ -44,6 +45,17 @@ namespace Drogueria_proyecto
             //sda.Fill(dt);
             //dgv_prod_ad.DataSource = dt;
             //BD.cerrar();
+            SqlConnection conn = new SqlConnection("Data Source = localhost; Initial Catalog = DROGUERIA; Integrated Security = True");
+            SqlCommand cmdProduct = new SqlCommand("Select codigo_categoria, descripcion_categoria from Categoria", conn);
+            SqlDataAdapter product = new SqlDataAdapter(cmdProduct);
+            DataTable table3 = new DataTable();
+            product.Fill(table3);
+            DataRow emptyProduct = table3.NewRow();
+            table3.Rows.InsertAt(emptyProduct, 0);
+            cbcategoria.DataSource = table3;
+            cbcategoria.DisplayMember = "descripcion_categoria";
+            cbcategoria.ValueMember = "codigo_categoria";
+            conn.Close();
         }
 
         private void dvg_administrador_producto_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -56,7 +68,10 @@ namespace Drogueria_proyecto
             txt_codinv_ad.Text = dgv_prod_ad.CurrentRow.Cells[0].Value.ToString();
             txt_Nom_ad.Text = dgv_prod_ad.CurrentRow.Cells[1].Value.ToString();
             txt_desinv_ad.Text = dgv_prod_ad.CurrentRow.Cells[2].Value.ToString();
-            txt_catinv_ad.Text = dgv_prod_ad.CurrentRow.Cells[3].Value.ToString();
+            categoria = dgv_prod_ad.CurrentRow.Cells[3].Value.ToString();
+
+            // Establece el valor del ComboBox a la categoría correspondiente
+            cbcategoria.SelectedValue = categoria;
             txt_provinv_ad.Text = dgv_prod_ad.CurrentRow.Cells[4].Value.ToString();
             txt_exisinv_ad.Text = dgv_prod_ad.CurrentRow.Cells[5].Value.ToString();
             textBox8.Text = dgv_prod_ad.CurrentRow.Cells[6].Value.ToString();
@@ -67,7 +82,7 @@ namespace Drogueria_proyecto
             try
             {
                 if (string.IsNullOrWhiteSpace(txt_exisinv_ad.Text) ||
-                    string.IsNullOrWhiteSpace(txt_catinv_ad.Text) ||
+                    string.IsNullOrWhiteSpace(cbcategoria.Text) ||
                     string.IsNullOrWhiteSpace(txt_desinv_ad.Text) ||
                     string.IsNullOrWhiteSpace(txt_Nom_ad.Text) ||
                     string.IsNullOrWhiteSpace(txt_provinv_ad.Text))
@@ -97,7 +112,7 @@ namespace Drogueria_proyecto
                                                             "VALUES (@nombre_producto, @descripcion_producto, @categoria_producto, @proveedor_producto, @existencia_producto, @precio_producto)", BD.sconexion);
                         agregar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
                         agregar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
-                        agregar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
+                        agregar.Parameters.AddWithValue("@categoria_producto", categoria);
                         agregar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
                         agregar.Parameters.AddWithValue("@existencia_producto", txt_exisinv_ad.Text); // Asegúrate de que esto coincida con el nombre en la base de datos
                         agregar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
@@ -108,7 +123,7 @@ namespace Drogueria_proyecto
                         // Limpiar los campos después de la inserción
                         txt_codinv_ad.Clear();
                         txt_exisinv_ad.Clear();
-                        txt_catinv_ad.Clear();
+                        cbcategoria.ResetText();
                         txt_desinv_ad.Clear();
                         txt_Nom_ad.Clear();
                         txt_provinv_ad.Clear();
@@ -144,7 +159,7 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_exisinv_ad.Text == string.Empty || txt_catinv_ad.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
+                if (txt_exisinv_ad.Text == string.Empty || cbcategoria.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede modificar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -173,7 +188,7 @@ namespace Drogueria_proyecto
                         modificar.Parameters.AddWithValue("@codigo_producto", txt_codinv_ad.Text);
                         modificar.Parameters.AddWithValue("@nombre_producto", txt_Nom_ad.Text);
                         modificar.Parameters.AddWithValue("@descripcion_producto", txt_desinv_ad.Text);
-                        modificar.Parameters.AddWithValue("@categoria_producto", txt_catinv_ad.Text);
+                        modificar.Parameters.AddWithValue("@categoria_producto", categoria);
                         modificar.Parameters.AddWithValue("@proveedor_producto", txt_provinv_ad.Text);
                         modificar.Parameters.AddWithValue("@existencia", txt_exisinv_ad.Text);
                         modificar.Parameters.AddWithValue("@precio_producto", textBox8.Text);
@@ -184,7 +199,7 @@ namespace Drogueria_proyecto
                         // Limpiar los campos después de la modificación
                         txt_codinv_ad.Clear();
                         txt_exisinv_ad.Clear();
-                        txt_catinv_ad.Clear();
+                        cbcategoria.ResetText();
                         txt_desinv_ad.Clear();
                         txt_Nom_ad.Clear();
                         txt_provinv_ad.Clear();
@@ -219,7 +234,7 @@ namespace Drogueria_proyecto
             
             try
             {
-                if (txt_exisinv_ad.Text == string.Empty || txt_catinv_ad.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
+                if (txt_exisinv_ad.Text == string.Empty || cbcategoria.Text == string.Empty || txt_desinv_ad.Text == string.Empty || txt_Nom_ad.Text == string.Empty || txt_provinv_ad.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede eliminar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -237,7 +252,7 @@ namespace Drogueria_proyecto
                     BD.cerrar();
                     txt_codinv_ad.Clear();
                     txt_exisinv_ad.Clear();
-                    txt_catinv_ad.Clear();
+                    cbcategoria.ResetText();
                     txt_desinv_ad.Clear();
                     txt_Nom_ad.Clear();
                     txt_provinv_ad.Clear();
@@ -341,13 +356,49 @@ namespace Drogueria_proyecto
             
         }
 
-        private void txt_catinv_ad_TextChanged_2(object sender, EventArgs e)
-        {
-            if (validaciones.validarNumeros(txt_catinv_ad.Text, "La existencia solo debe contener números"))
-            {
-                errorP_existpro_ad.SetError(txt_catinv_ad, " La existencia solo debe contener numeros");
-                txt_catinv_ad.Text = "";
+       
 
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Producto", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Producto WHERE nombre_producto LIKE @nombre_producto", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_producto", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dgv_prod_ad.DataSource = dt;
+
+            BD.cerrar();
+        }
+
+        private void cbcategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica si hay un elemento seleccionado
+            if (cbcategoria.SelectedValue != null)
+            {
+                // Guarda el codigo_empleado en una variable
+                categoria = cbcategoria.SelectedValue.ToString();
+
+                // Puedes usar la variable codigoEmpleado como desees
+                Console.WriteLine("Código del empleado seleccionado: " + categoria);
             }
         }
     }

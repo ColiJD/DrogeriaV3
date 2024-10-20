@@ -300,5 +300,37 @@ namespace Drogueria_proyecto
         {
 
         }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Cliente", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Cliente WHERE nombre_cliente LIKE @nombre_cliente", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_cliente", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dtg_administrador_empleado.DataSource = dt;
+
+            BD.cerrar();
+        }
     }
 }

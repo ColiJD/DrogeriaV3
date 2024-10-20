@@ -92,80 +92,122 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_nombclien_gr.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_dirclien.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_telclien.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_nombclien_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_correoclien.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_dirclien.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_telclien.Text))
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (txt_gr_telclien.Text.Length < 8)
+                {
+                    // Validar que el teléfono tenga al menos 8 dígitos
+                    MessageBox.Show("Error... El teléfono debe tener mínimo 8 caracteres", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand agregar = new SqlCommand("insert into Cliente values (@nombre_cliente ,@direccion_cliente,@correo_cliente,@telefono_cliente)", BD.sconexion);
-                    agregar.Parameters.AddWithValue("@nombre_cliente", txt_nombclien_gr.Text);
-                    agregar.Parameters.AddWithValue("@correo_cliente", txt_gr_correoclien.Text);
-                    agregar.Parameters.AddWithValue("@direccion_cliente", txt_gr_dirclien.Text);
-                    agregar.Parameters.AddWithValue("@telefono_cliente", txt_gr_telclien.Text);
 
+                    // Verificar si ya existe el nombre o correo en la base de datos
+                    SqlCommand verificar = new SqlCommand("SELECT COUNT(*) FROM Cliente WHERE nombre_cliente = @nombre_cliente OR correo_cliente = @correo_cliente", BD.sconexion);
+                    verificar.Parameters.AddWithValue("@nombre_cliente", txt_nombclien_gr.Text);
+                    verificar.Parameters.AddWithValue("@correo_cliente", txt_gr_correoclien.Text);
 
-                    agregar.ExecuteNonQuery();
+                    int count = (int)verificar.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        // Si el nombre o el correo ya existen, mostramos un mensaje de error y no insertamos
+                        MessageBox.Show("Error... El nombre o el correo ya existen en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // Insertar los datos si no existen duplicados
+                        SqlCommand agregar = new SqlCommand("INSERT INTO Cliente (nombre_cliente, direccion_cliente, correo_cliente, telefono_cliente) VALUES (@nombre_cliente, @direccion_cliente, @correo_cliente, @telefono_cliente)", BD.sconexion);
+                        agregar.Parameters.AddWithValue("@nombre_cliente", txt_nombclien_gr.Text);
+                        agregar.Parameters.AddWithValue("@correo_cliente", txt_gr_correoclien.Text);
+                        agregar.Parameters.AddWithValue("@direccion_cliente", txt_gr_dirclien.Text);
+                        agregar.Parameters.AddWithValue("@telefono_cliente", txt_gr_telclien.Text);
+                        agregar.ExecuteNonQuery();
+
+                        // Limpiar los campos y mostrar mensaje de éxito
+                        txt_idcliente_gr.Clear();
+                        txt_nombclien_gr.Clear();
+                        txt_gr_correoclien.Clear();
+                        txt_gr_dirclien.Clear();
+                        txt_gr_telclien.Clear();
+                        MessageBox.Show("Datos Agregados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Recargar datos en la tabla
+                        cls_Conexion clsConexion1 = new cls_Conexion();
+                        clsConexion1.cargarDatos(dgv_gerente_clientes, "Cliente");
+                    }
+
                     BD.cerrar();
-                    txt_idcliente_gr.Clear();
-                    txt_nombclien_gr.Clear();
-                    txt_gr_correoclien.Clear();
-                    txt_gr_dirclien.Clear();
-                    txt_gr_telclien.Clear();
-
                     this.txt_idcliente_gr.Focus();
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dgv_gerente_clientes, "Cliente");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            errorP_nombcl_gr.Clear();
-            errorP_dirc_cl_g.Clear();
-            errorP_tel_cl_g.Clear();
-            errorPro_correocli_g.Clear();
+            finally
+            {
+                // Limpiar errores de validación
+                errorP_nombcl_gr.Clear();
+                errorP_dirc_cl_g.Clear();
+                errorP_tel_cl_g.Clear();
+                errorPro_correocli_g.Clear();
+            }
+
+
         }
 
         private void btn_gr_eliclien_Click(object sender, EventArgs e)
         {
             try
             {
-                if (txt_nombclien_gr.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_dirclien.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_telclien.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_idcliente_gr.Text))
                 {
                     MessageBox.Show("Error... No puede eliminar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand eliminar = new SqlCommand("delete from Cliente where codigo_cliente=@codigo_cliente", BD.sconexion);
-                    eliminar.Parameters.AddWithValue("@codigo_cliente",Convert.ToInt32(txt_idcliente_gr.Text));
-                   
 
+                    // Eliminar el cliente de la base de datos
+                    SqlCommand eliminar = new SqlCommand("DELETE FROM Cliente WHERE codigo_cliente = @codigo_cliente", BD.sconexion);
+                    eliminar.Parameters.AddWithValue("@codigo_cliente", Convert.ToInt32(txt_idcliente_gr.Text));
 
                     eliminar.ExecuteNonQuery();
-                    BD.cerrar();
+
+                    // Limpiar los campos y mostrar mensaje de éxito
                     txt_idcliente_gr.Clear();
                     txt_nombclien_gr.Clear();
                     txt_gr_correoclien.Clear();
                     txt_gr_dirclien.Clear();
                     txt_gr_telclien.Clear();
+                    MessageBox.Show("Datos Eliminados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.txt_idcliente_gr.Focus();
+                    // Recargar datos en la tabla
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dgv_gerente_clientes, "Cliente");
+
+                    BD.cerrar();
+                    this.txt_idcliente_gr.Focus();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
 
         }
 
@@ -173,45 +215,64 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_nombclien_gr.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_dirclien.Text == string.Empty || txt_gr_correoclien.Text == string.Empty || txt_gr_telclien.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_nombclien_gr.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_correoclien.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_dirclien.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_telclien.Text))
                 {
                     MessageBox.Show("Error... No puede modificar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (txt_gr_telclien.Text.Length < 8)
+                {
+                    // Validar que el teléfono tenga al menos 8 dígitos
+                    MessageBox.Show("Error... El teléfono debe tener mínimo 8 caracteres", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand modificar = new SqlCommand("update Cliente set nombre_cliente=@nombre_cliente,direccion_cliente=@direccion_cliente,correo_cliente=@correo_cliente," +
-                        "telefono_cliente=@telefono_cliente where codigo_cliente=@codigo_cliente", BD.sconexion);
+
+                    // Actualizar los datos del cliente en la base de datos
+                    SqlCommand modificar = new SqlCommand("UPDATE Cliente SET nombre_cliente = @nombre_cliente, direccion_cliente = @direccion_cliente, correo_cliente = @correo_cliente, telefono_cliente = @telefono_cliente WHERE codigo_cliente = @codigo_cliente", BD.sconexion);
                     modificar.Parameters.AddWithValue("@codigo_cliente", txt_idcliente_gr.Text);
                     modificar.Parameters.AddWithValue("@nombre_cliente", txt_nombclien_gr.Text);
                     modificar.Parameters.AddWithValue("@direccion_cliente", txt_gr_dirclien.Text);
                     modificar.Parameters.AddWithValue("@correo_cliente", txt_gr_correoclien.Text);
                     modificar.Parameters.AddWithValue("@telefono_cliente", txt_gr_telclien.Text);
 
-
                     modificar.ExecuteNonQuery();
-                    BD.cerrar();
+
+                    // Limpiar los campos y mostrar mensaje de éxito
                     txt_idcliente_gr.Clear();
                     txt_nombclien_gr.Clear();
                     txt_gr_correoclien.Clear();
                     txt_gr_dirclien.Clear();
                     txt_gr_telclien.Clear();
+                    MessageBox.Show("Datos Modificados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.txt_idcliente_gr.Focus();
+                    // Recargar datos en la tabla
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dgv_gerente_clientes, "Cliente");
+
+                    BD.cerrar();
+                    this.txt_idcliente_gr.Focus();
                 }
-           }
-            catch
-           {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
             }
-            errorP_nombcl_gr.Clear();
-            errorP_dirc_cl_g.Clear();
-            errorP_tel_cl_g.Clear();
-            errorPro_correocli_g.Clear();
+            catch (Exception ex)
+            {
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Limpiar errores de validación
+                errorP_nombcl_gr.Clear();
+                errorP_dirc_cl_g.Clear();
+                errorP_tel_cl_g.Clear();
+                errorPro_correocli_g.Clear();
+            }
+
 
         }
         Class1 validaciones = new Class1();

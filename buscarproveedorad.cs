@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -87,5 +88,38 @@ namespace Drogueria_proyecto
                 CenterToScreen();
             }
         }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Proveedor", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Proveedor WHERE nombre_proveedor LIKE @nombre_proveedor", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_proveedor", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dataGridView1.DataSource = dt;
+
+            BD.cerrar();
+        }
     }
+    
 }

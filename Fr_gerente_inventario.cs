@@ -67,18 +67,25 @@ namespace Drogueria_proyecto
         private void btn_gr_agreinv_Click(object sender, EventArgs e)
         {
             try
-             {
-                if (txt_exisinv.Text == string.Empty || txt_gr_catinv.Text == string.Empty || txt_gr_desinv.Text == string.Empty ||txt_gr_nominv.Text == string.Empty || txt_gr_provinv.Text == string.Empty)
+            {
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_exisinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_catinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_desinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_nominv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_provinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_precioPro_g.Text))
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand agregar = new SqlCommand("insert into Producto values (@nombre_producto, @descripcion_producto ,@categoria_producto, @proveedor_producto, " +
-                        "@existencia_producto,@precio_producto)", BD.sconexion);
+
+                    // Insertar el producto en la base de datos
+                    SqlCommand agregar = new SqlCommand("INSERT INTO Producto (nombre_producto, descripcion_producto, categoria_producto, proveedor_producto, existencia_producto, precio_producto) " +
+                                                        "VALUES (@nombre_producto, @descripcion_producto, @categoria_producto, @proveedor_producto, @existencia_producto, @precio_producto)", BD.sconexion);
                     agregar.Parameters.AddWithValue("@nombre_producto", txt_gr_nominv.Text);
                     agregar.Parameters.AddWithValue("@descripcion_producto", txt_gr_desinv.Text);
                     agregar.Parameters.AddWithValue("@categoria_producto", txt_gr_catinv.Text);
@@ -86,9 +93,10 @@ namespace Drogueria_proyecto
                     agregar.Parameters.AddWithValue("@existencia_producto", txt_exisinv.Text);
                     agregar.Parameters.AddWithValue("@precio_producto", txt_precioPro_g.Text);
 
-
                     agregar.ExecuteNonQuery();
                     BD.cerrar();
+
+                    // Limpiar los campos y mostrar mensaje de éxito
                     txt_codinv_gr.Clear();
                     txt_exisinv.Clear();
                     txt_gr_catinv.Clear();
@@ -96,22 +104,28 @@ namespace Drogueria_proyecto
                     txt_gr_nominv.Clear();
                     txt_gr_provinv.Clear();
                     txt_precioPro_g.Clear();
+                    MessageBox.Show("Datos Agregados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.txt_gr_nominv.Focus();
+                    // Recargar datos en la tabla
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dataGridView1, "Producto");
+
+                    this.txt_gr_nominv.Focus();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
+            // Limpiar los errores de validación en los campos
             errorP_catpro_g.Clear();
             errorP_despro_g.Clear();
             errorP_existpro_g.Clear();
             errorP_nombpro_g.Clear();
             errorP_preciopro_ge.Clear();
+
 
         }
 
@@ -119,21 +133,28 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_exisinv.Text == string.Empty || txt_gr_catinv.Text == string.Empty || txt_gr_desinv.Text == string.Empty || txt_gr_nominv.Text == string.Empty || txt_gr_provinv.Text == string.Empty)
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_exisinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_catinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_desinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_nominv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_provinv.Text))
                 {
                     MessageBox.Show("Error... No puede borrar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand eliminar = new SqlCommand("delete from Producto where codigo_producto=@codigo_producto", BD.sconexion);
+
+                    // Eliminar el producto de la base de datos
+                    SqlCommand eliminar = new SqlCommand("DELETE FROM Producto WHERE codigo_producto = @codigo_producto", BD.sconexion);
                     eliminar.Parameters.AddWithValue("@codigo_producto", txt_codinv_gr.Text);
-               
 
                     eliminar.ExecuteNonQuery();
                     BD.cerrar();
+
+                    // Limpiar los campos y mostrar mensaje de éxito
                     txt_codinv_gr.Clear();
                     txt_exisinv.Clear();
                     txt_gr_catinv.Clear();
@@ -142,15 +163,21 @@ namespace Drogueria_proyecto
                     txt_gr_provinv.Clear();
                     txt_precioPro_g.Clear();
 
-                    this.txt_gr_nominv.Focus();
+                    MessageBox.Show("Producto eliminado correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Recargar los datos en la tabla
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dataGridView1, "Producto");
+
+                    this.txt_gr_nominv.Focus();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error...El codigo ya existe en la base de datos");
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
 
 
         }
@@ -158,18 +185,25 @@ namespace Drogueria_proyecto
         private void btn_gr_modinv_Click(object sender, EventArgs e)
         {
             try
-              {
-                if (txt_exisinv.Text == string.Empty || txt_gr_catinv.Text == string.Empty || txt_gr_desinv.Text == string.Empty || txt_gr_nominv.Text == string.Empty || txt_gr_provinv.Text == string.Empty)
+            {
+                // Verificar si hay campos vacíos
+                if (string.IsNullOrWhiteSpace(txt_exisinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_catinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_desinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_nominv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_gr_provinv.Text) ||
+                    string.IsNullOrWhiteSpace(txt_precioPro_g.Text))
                 {
                     MessageBox.Show("Error... No puede modificar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
-                    SqlCommand modificar = new SqlCommand("update Producto set nombre_producto=@nombre_producto, descripcion_producto=@descripcion_producto ,categoria_producto=@categoria_producto, proveedor_producto=@proveedor_producto, " +
-                        "existencia_producto=@existencia_producto, precio_producto=@precio_producto where codigo_producto = @codigo_producto", BD.sconexion);
+
+                    // Modificar el producto en la base de datos
+                    SqlCommand modificar = new SqlCommand("UPDATE Producto SET nombre_producto=@nombre_producto, descripcion_producto=@descripcion_producto, categoria_producto=@categoria_producto, " +
+                                                          "proveedor_producto=@proveedor_producto, existencia_producto=@existencia_producto, precio_producto=@precio_producto WHERE codigo_producto=@codigo_producto", BD.sconexion);
                     modificar.Parameters.AddWithValue("@codigo_producto", txt_codinv_gr.Text);
                     modificar.Parameters.AddWithValue("@nombre_producto", txt_gr_nominv.Text);
                     modificar.Parameters.AddWithValue("@descripcion_producto", txt_gr_desinv.Text);
@@ -178,9 +212,10 @@ namespace Drogueria_proyecto
                     modificar.Parameters.AddWithValue("@existencia_producto", txt_exisinv.Text);
                     modificar.Parameters.AddWithValue("@precio_producto", txt_precioPro_g.Text);
 
-
                     modificar.ExecuteNonQuery();
                     BD.cerrar();
+
+                    // Limpiar los campos y mostrar mensaje de éxito
                     txt_codinv_gr.Clear();
                     txt_exisinv.Clear();
                     txt_gr_catinv.Clear();
@@ -188,21 +223,28 @@ namespace Drogueria_proyecto
                     txt_gr_nominv.Clear();
                     txt_gr_provinv.Clear();
                     txt_precioPro_g.Clear();
+                    MessageBox.Show("Datos modificados correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.txt_gr_nominv.Focus();
+                    // Recargar datos en la tabla
                     cls_Conexion clsConexion1 = new cls_Conexion();
                     clsConexion1.cargarDatos(dataGridView1, "Producto");
+
+                    this.txt_gr_nominv.Focus();
                 }
-             }
-           catch
-             {
-               MessageBox.Show("Error...El codigo ya existe en la base de datos");
-              }
+            }
+            catch (Exception ex)
+            {
+                // Mostrar el error en un mensaje
+                MessageBox.Show("Error... " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Limpiar los errores de validación en los campos
             errorP_catpro_g.Clear();
             errorP_despro_g.Clear();
             errorP_existpro_g.Clear();
             errorP_nombpro_g.Clear();
             errorP_preciopro_ge.Clear();
+
         }
 
         private void btn_grinv_regresar_Click(object sender, EventArgs e)

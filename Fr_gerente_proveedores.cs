@@ -199,40 +199,70 @@ namespace Drogueria_proyecto
                     cls_Conexion BD = new cls_Conexion();
                     BD.abrir();
 
-                    // Preparar el comando de actualización
-                    SqlCommand modificar = new SqlCommand("UPDATE Proveedor SET nombre_proveedor = @nombre_proveedor, direccion_proveedor = @direccion_proveedor, correo_proveedor = @correo_proveedor, telefono_proveedor = @telefono_proveedor WHERE codigo_proveedor = @codigo_proveedor", BD.sconexion);
+                    // Verificar si el nombre del proveedor ya existe para otro registro
+                    SqlCommand verificarNombre = new SqlCommand("SELECT COUNT(*) FROM Proveedor WHERE nombre_proveedor = @nombre_proveedor AND codigo_proveedor != @codigo_proveedor", BD.sconexion);
+                    verificarNombre.Parameters.AddWithValue("@nombre_proveedor", txt_gr_nomprov.Text);
+                    verificarNombre.Parameters.AddWithValue("@codigo_proveedor", txt_codprov_gr.Text);
 
-                    // Agregar parámetros
-                    modificar.Parameters.AddWithValue("@codigo_proveedor", txt_codprov_gr.Text);
-                    modificar.Parameters.AddWithValue("@nombre_proveedor", txt_gr_nomprov.Text);
-                    modificar.Parameters.AddWithValue("@direccion_proveedor", txt_gr_desprov.Text);
-                    modificar.Parameters.AddWithValue("@correo_proveedor", txt_gr_corprov.Text);
-                    modificar.Parameters.AddWithValue("@telefono_proveedor", txt_gr_telprov.Text);
+                    int countNombre = (int)verificarNombre.ExecuteScalar();
 
-                    // Ejecutar la actualización
-                    int rowsAffected = modificar.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
+                    if (countNombre > 0)
                     {
-                        // Si se actualizó correctamente, limpiar los campos
-                        txt_codprov_gr.Clear();
-                        txt_gr_corprov.Clear();
-                        txt_gr_desprov.Clear();
-                        txt_gr_nomprov.Clear();
-                        txt_gr_telprov.Clear();
-                        MessageBox.Show("Datos Modificados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Si el nombre ya está en uso por otro proveedor, mostramos un mensaje de error
+                        MessageBox.Show("Error... El nombre del proveedor ya existe en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        MessageBox.Show("Error... No se encontró el proveedor para modificar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Verificar si el correo del proveedor ya existe para otro registro
+                        SqlCommand verificarCorreo = new SqlCommand("SELECT COUNT(*) FROM Proveedor WHERE correo_proveedor = @correo_proveedor AND codigo_proveedor != @codigo_proveedor", BD.sconexion);
+                        verificarCorreo.Parameters.AddWithValue("@correo_proveedor", txt_gr_corprov.Text);
+                        verificarCorreo.Parameters.AddWithValue("@codigo_proveedor", txt_codprov_gr.Text);
+
+                        int countCorreo = (int)verificarCorreo.ExecuteScalar();
+
+                        if (countCorreo > 0)
+                        {
+                            // Si el correo ya está en uso por otro proveedor, mostramos un mensaje de error
+                            MessageBox.Show("Error... El correo electrónico ya existe en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            // Preparar el comando de actualización
+                            SqlCommand modificar = new SqlCommand("UPDATE Proveedor SET nombre_proveedor = @nombre_proveedor, direccion_proveedor = @direccion_proveedor, correo_proveedor = @correo_proveedor, telefono_proveedor = @telefono_proveedor WHERE codigo_proveedor = @codigo_proveedor", BD.sconexion);
+
+                            // Agregar parámetros
+                            modificar.Parameters.AddWithValue("@codigo_proveedor", txt_codprov_gr.Text);
+                            modificar.Parameters.AddWithValue("@nombre_proveedor", txt_gr_nomprov.Text);
+                            modificar.Parameters.AddWithValue("@direccion_proveedor", txt_gr_desprov.Text);
+                            modificar.Parameters.AddWithValue("@correo_proveedor", txt_gr_corprov.Text);
+                            modificar.Parameters.AddWithValue("@telefono_proveedor", txt_gr_telprov.Text);
+
+                            // Ejecutar la actualización
+                            int rowsAffected = modificar.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Si se actualizó correctamente, limpiar los campos
+                                txt_codprov_gr.Clear();
+                                txt_gr_corprov.Clear();
+                                txt_gr_desprov.Clear();
+                                txt_gr_nomprov.Clear();
+                                txt_gr_telprov.Clear();
+                                MessageBox.Show("Datos Modificados Correctamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error... No se encontró el proveedor para modificar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                            BD.cerrar();
+                            this.txt_codprov_gr.Focus();
+
+                            // Recargar datos en la tabla
+                            cls_Conexion clsConexion1 = new cls_Conexion();
+                            clsConexion1.cargarDatos(dataGridView1, "Proveedor");
+                        }
                     }
-
-                    BD.cerrar();
-                    this.txt_codprov_gr.Focus();
-
-                    // Recargar datos en la tabla
-                    cls_Conexion clsConexion1 = new cls_Conexion();
-                    clsConexion1.cargarDatos(dataGridView1, "Proveedor");
                 }
             }
             catch (Exception ex)
@@ -246,6 +276,7 @@ namespace Drogueria_proyecto
                 errorP_nombprov_g.Clear();
                 errorP_telprov_g.Clear();
             }
+
 
 
 
@@ -326,6 +357,37 @@ namespace Drogueria_proyecto
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Proveedor", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Proveedor WHERE nombre_proveedor LIKE @nombre_proveedor", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_proveedor", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dataGridView1.DataSource = dt;
+
+            BD.cerrar();
         }
     }
 }

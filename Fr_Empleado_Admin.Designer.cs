@@ -50,7 +50,6 @@ namespace Drogueria_proyecto
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.txt_tipoempl_gr = new System.Windows.Forms.TextBox();
             this.txt_pas_ad = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.errorP_usu_ad = new System.Windows.Forms.ErrorProvider(this.components);
@@ -62,7 +61,10 @@ namespace Drogueria_proyecto
             this.txt_correoempl_gr = new System.Windows.Forms.TextBox();
             this.empleadoTableAdapter = new Drogueria_proyecto.DROGUERIADataSet2TableAdapters.EmpleadoTableAdapter();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_administrador_empleado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dROGUERIADataSet2)).BeginInit();
@@ -92,12 +94,12 @@ namespace Drogueria_proyecto
             this.codigotipoDataGridViewTextBoxColumn,
             this.correo});
             this.dtg_administrador_empleado.DataSource = this.empleadoBindingSource;
-            this.dtg_administrador_empleado.Location = new System.Drawing.Point(0, 323);
+            this.dtg_administrador_empleado.Location = new System.Drawing.Point(0, 365);
             this.dtg_administrador_empleado.Name = "dtg_administrador_empleado";
             this.dtg_administrador_empleado.RowHeadersVisible = false;
             this.dtg_administrador_empleado.RowHeadersWidth = 51;
             this.dtg_administrador_empleado.RowTemplate.Height = 46;
-            this.dtg_administrador_empleado.Size = new System.Drawing.Size(784, 240);
+            this.dtg_administrador_empleado.Size = new System.Drawing.Size(784, 198);
             this.dtg_administrador_empleado.TabIndex = 1;
             this.dtg_administrador_empleado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_administrador_empleado_CellContentClick);
             this.dtg_administrador_empleado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_gerente_clientes_CellDoubleClick);
@@ -208,7 +210,7 @@ namespace Drogueria_proyecto
             this.txt_idEmpleado_gr.Location = new System.Drawing.Point(60, 63);
             this.txt_idEmpleado_gr.Multiline = true;
             this.txt_idEmpleado_gr.Name = "txt_idEmpleado_gr";
-            this.txt_idEmpleado_gr.Size = new System.Drawing.Size(263, 24);
+            this.txt_idEmpleado_gr.Size = new System.Drawing.Size(263, 28);
             this.txt_idEmpleado_gr.TabIndex = 6;
             // 
             // txt_usuaempl_gr
@@ -218,7 +220,7 @@ namespace Drogueria_proyecto
             this.txt_usuaempl_gr.MaxLength = 35;
             this.txt_usuaempl_gr.Multiline = true;
             this.txt_usuaempl_gr.Name = "txt_usuaempl_gr";
-            this.txt_usuaempl_gr.Size = new System.Drawing.Size(263, 24);
+            this.txt_usuaempl_gr.Size = new System.Drawing.Size(263, 28);
             this.txt_usuaempl_gr.TabIndex = 7;
             this.txt_usuaempl_gr.TextChanged += new System.EventHandler(this.txt_usuaempl_gr_TextChanged);
             // 
@@ -231,7 +233,7 @@ namespace Drogueria_proyecto
             this.txt_nomempl_gr.MaxLength = 35;
             this.txt_nomempl_gr.Multiline = true;
             this.txt_nomempl_gr.Name = "txt_nomempl_gr";
-            this.txt_nomempl_gr.Size = new System.Drawing.Size(263, 24);
+            this.txt_nomempl_gr.Size = new System.Drawing.Size(263, 28);
             this.txt_nomempl_gr.TabIndex = 8;
             this.txt_nomempl_gr.TextChanged += new System.EventHandler(this.txt_nomempl_gr_TextChanged);
             // 
@@ -277,17 +279,6 @@ namespace Drogueria_proyecto
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // txt_tipoempl_gr
-            // 
-            this.txt_tipoempl_gr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_tipoempl_gr.Location = new System.Drawing.Point(61, 223);
-            this.txt_tipoempl_gr.MaxLength = 1;
-            this.txt_tipoempl_gr.Multiline = true;
-            this.txt_tipoempl_gr.Name = "txt_tipoempl_gr";
-            this.txt_tipoempl_gr.Size = new System.Drawing.Size(263, 24);
-            this.txt_tipoempl_gr.TabIndex = 9;
-            this.txt_tipoempl_gr.TextChanged += new System.EventHandler(this.txt_tipoempl_gr_TextChanged);
-            // 
             // txt_pas_ad
             // 
             this.txt_pas_ad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -297,7 +288,7 @@ namespace Drogueria_proyecto
             this.txt_pas_ad.MaxLength = 35;
             this.txt_pas_ad.Multiline = true;
             this.txt_pas_ad.Name = "txt_pas_ad";
-            this.txt_pas_ad.Size = new System.Drawing.Size(263, 24);
+            this.txt_pas_ad.Size = new System.Drawing.Size(263, 28);
             this.txt_pas_ad.TabIndex = 13;
             this.txt_pas_ad.TextChanged += new System.EventHandler(this.txt_pas_ad_TextChanged);
             // 
@@ -352,7 +343,7 @@ namespace Drogueria_proyecto
             this.txt_correoempl_gr.MaxLength = 45;
             this.txt_correoempl_gr.Multiline = true;
             this.txt_correoempl_gr.Name = "txt_correoempl_gr";
-            this.txt_correoempl_gr.Size = new System.Drawing.Size(263, 24);
+            this.txt_correoempl_gr.Size = new System.Drawing.Size(263, 28);
             this.txt_correoempl_gr.TabIndex = 17;
             this.txt_correoempl_gr.TextChanged += new System.EventHandler(this.txt_correoempl_gr_TextChanged);
             // 
@@ -362,7 +353,8 @@ namespace Drogueria_proyecto
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.txt_tipoempl_gr);
+            this.guna2Panel1.Controls.Add(this.cbTipo);
+            this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.txt_correoempl_gr);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.label8);
@@ -377,20 +369,59 @@ namespace Drogueria_proyecto
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(784, 273);
+            this.guna2Panel1.Size = new System.Drawing.Size(784, 313);
             this.guna2Panel1.TabIndex = 18;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
+            // cbTipo
+            // 
+            this.cbTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Location = new System.Drawing.Point(60, 223);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(263, 28);
+            this.cbTipo.TabIndex = 51;
+            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(60, 281);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 29);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Buscar:";
+            // 
             // guna2Panel2
             // 
+            this.guna2Panel2.Controls.Add(this.txtBuscar);
             this.guna2Panel2.Controls.Add(this.btnModificar);
             this.guna2Panel2.Controls.Add(this.btnAgregar);
             this.guna2Panel2.Controls.Add(this.btnEliminar);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 273);
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 313);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(784, 49);
             this.guna2Panel2.TabIndex = 19;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.Location = new System.Drawing.Point(61, 16);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(1);
+            this.txtBuscar.MaxLength = 35;
+            this.txtBuscar.Multiline = true;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(188, 28);
+            this.txtBuscar.TabIndex = 17;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // Fr_Empleado_Admin
             // 
@@ -418,6 +449,7 @@ namespace Drogueria_proyecto
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -434,7 +466,6 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.TextBox txt_tipoempl_gr;
         private System.Windows.Forms.TextBox txt_pas_ad;
         private System.Windows.Forms.Label label6;
         private DROGUERIADataSet2 dROGUERIADataSet2;
@@ -455,5 +486,8 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.DataGridViewTextBoxColumn correo;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbTipo;
     }
 }

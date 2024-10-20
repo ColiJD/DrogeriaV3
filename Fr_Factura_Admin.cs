@@ -20,29 +20,33 @@ namespace Drogueria_proyecto
         SqlCommand datagridcmd;
         SqlDataAdapter adpt;
         DataTable dt;
+        private string codigoEmpleado = "";
+        private string codigoProducto = "";
         public Fr_Factura_Admin()
         {
             InitializeComponent();
+
             showdata();
         }
         private void Fr_Factura_Admin_Load(object sender, EventArgs e)
         {
+            
+            txtFactura.Enabled = false;
+
+            txtImp.Enabled = false;
+            txtSubtotal.Enabled = false;
+            txtTotal.Enabled = false;
+            txtPrecio.Enabled = false;
+            
+            
+
+
             SqlConnection conn = new SqlConnection("Data Source = localhost; Initial Catalog = DROGUERIA; Integrated Security = True");
             SqlCommand cmd = new SqlCommand("Select codigo_empleado, nombre_empleado from Empleado", conn);
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;
             DataTable table1 = new DataTable();
             da.Fill(table1);
-            txtFactura.Enabled = false;
-            txtProducto.Enabled = false;
-            txtImp.Enabled = false;
-            txtSubtotal.Enabled = false;
-            txtTotal.Enabled = false;
-            txtPrecio.Enabled = false;
-            cboxEmp.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboxCliente.DropDownStyle = ComboBoxStyle.DropDownList;
-
-
             DataRow emptyRo = table1.NewRow();
             table1.Rows.InsertAt(emptyRo, 0);
             cboxEmp.DataSource = table1;
@@ -64,12 +68,23 @@ namespace Drogueria_proyecto
             cboxCliente.DisplayMember = "nombre_cliente";
             cboxCliente.ValueMember = "codigo_cliente";
 
-            txtIDP.Clear();
+
+            // Cargar productos
+            SqlCommand cmdProduct = new SqlCommand("Select codigo_producto, nombre_producto from Producto", conn);
+            SqlDataAdapter product = new SqlDataAdapter(cmdProduct);
+            DataTable table3 = new DataTable();
+            product.Fill(table3);
+            DataRow emptyProduct = table3.NewRow();
+            table3.Rows.InsertAt(emptyProduct, 0);
+            cbProducto.DataSource = table3;
+            cbProducto.DisplayMember = "nombre_producto";
+            cbProducto.ValueMember = "codigo_producto";
+
+            cbProducto.ResetText();
             txtCantidad.Clear();
             txtFactura.Clear();
             txtImp.Clear();
             txtPrecio.Clear();
-            txtProducto.Clear();
             txtSubtotal.Clear();
             txtTotal.Clear();
             cboxCliente.ResetText();
@@ -125,43 +140,7 @@ namespace Drogueria_proyecto
 
         }
 
-        private void txtIDP_TextChanged(object sender, EventArgs e)
-        {
-            SqlConnection conexionp = new SqlConnection("Data Source = localhost; Initial Catalog = DROGUERIA; Integrated Security = True");
-            conexionp.Open();
-
-            if (txtIDP.Text != "")
-            {
-                SqlCommand cmd = new SqlCommand("Select nombre_producto, precio_producto from Producto where codigo_producto = @codigo_producto", conexionp);
-                cmd.Parameters.AddWithValue("@codigo_producto", int.Parse(txtIDP.Text));
-                SqlDataReader da = cmd.ExecuteReader();
-
-                // Verifica si hay filas devueltas
-                if (da.HasRows)
-                {
-                    while (da.Read())
-                    {
-                        txtProducto.Text = da.GetValue(0).ToString();
-                        txtPrecio.Text = da.GetValue(1).ToString();
-                    }
-                }
-                else
-                {
-                    // Si no hay resultados, limpiar los TextBox
-                    txtProducto.Text = "";
-                    txtPrecio.Text = "";
-                }
-
-                da.Close(); // Cierra el DataReader
-                conexionp.Close();
-            }
-            else
-            {
-                // Si el txtIDP está vacío, también limpiar los TextBox
-                txtProducto.Text = "";
-                txtPrecio.Text = "";
-            }
-        }
+       
 
         private void label9_Click(object sender, EventArgs e)
         {
@@ -215,7 +194,7 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txtIDP.Text == string.Empty || txtCantidad.Text == string.Empty || cboxCliente.Text == string.Empty || cboxEmp.Text == string.Empty || txtTotal.Text == string.Empty)
+                if (cbProducto.Text == string.Empty || txtCantidad.Text == string.Empty || cboxCliente.Text == string.Empty || cboxEmp.Text == string.Empty || txtTotal.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -228,8 +207,8 @@ namespace Drogueria_proyecto
                         "@precio, @cantidad, @subtotal, @impuesto, @total)", BD.sconexion);
                     agregar.Parameters.AddWithValue("@empleado_factura", cboxEmp.Text);
                     agregar.Parameters.AddWithValue("@cliente_factura", cboxCliente.Text);
-                    agregar.Parameters.AddWithValue("@Id_producto", txtIDP.Text);
-                    agregar.Parameters.AddWithValue("@nombre_producto", txtProducto.Text);
+                    agregar.Parameters.AddWithValue("@Id_producto", codigoProducto);
+                    agregar.Parameters.AddWithValue("@nombre_producto", cbProducto.Text);
                     agregar.Parameters.AddWithValue("@precio", txtPrecio.Text);
                     agregar.Parameters.AddWithValue("@cantidad", txtCantidad.Text);
                     agregar.Parameters.AddWithValue("@subtotal", txtSubtotal.Text);
@@ -240,12 +219,12 @@ namespace Drogueria_proyecto
                     MessageBox.Show("Aviso ... Los Datos se agregaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
-                    txtIDP.Clear();
+                    cbProducto.ResetText();
                     txtCantidad.Clear();
                     txtFactura.Clear();
                     txtImp.Clear();
                     txtPrecio.Clear();
-                    txtProducto.Clear();
+                   
                     txtSubtotal.Clear();
                     txtTotal.Clear();
                     cboxCliente.ResetText();
@@ -253,7 +232,7 @@ namespace Drogueria_proyecto
                     
 
 
-                    this.txtProducto.Focus();
+                    this.cbProducto.Focus();
                 }
             }
             catch (FormatException)
@@ -283,7 +262,7 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txtIDP.Text == string.Empty || txtPrecio.Text == string.Empty || txtSubtotal.Text == string.Empty || txtImp.Text == string.Empty || txtTotal.Text == string.Empty)
+                if (cbProducto.Text == string.Empty || txtPrecio.Text == string.Empty || txtSubtotal.Text == string.Empty || txtImp.Text == string.Empty || txtTotal.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -301,8 +280,8 @@ namespace Drogueria_proyecto
                     modificar.Parameters.AddWithValue("@Id_factura", txtFactura.Text);
                     modificar.Parameters.AddWithValue("@empleado_factura", cboxEmp.Text);
                     modificar.Parameters.AddWithValue("@cliente_factura", cboxCliente.Text);
-                    modificar.Parameters.AddWithValue("@Id_producto", txtIDP.Text);
-                    modificar.Parameters.AddWithValue("@nombre_producto", txtProducto.Text);
+                    modificar.Parameters.AddWithValue("@Id_producto", codigoProducto);
+                    modificar.Parameters.AddWithValue("@nombre_producto", cbProducto.Text);
 
                     // Convertir los campos que deberían ser numéricos
                     modificar.Parameters.AddWithValue("@precio", Convert.ToDecimal(txtPrecio.Text));
@@ -316,12 +295,12 @@ namespace Drogueria_proyecto
                     MessageBox.Show("Aviso ... Los Datos se modificaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
-                    txtIDP.Clear();
+                    cbProducto.ResetText();
                     txtCantidad.Clear();
                     txtFactura.Clear();
                     txtImp.Clear();
                     txtPrecio.Clear();
-                    txtProducto.Clear();
+                    
                     txtSubtotal.Clear();
                     txtTotal.Clear();
                     cboxCliente.ResetText();
@@ -329,7 +308,7 @@ namespace Drogueria_proyecto
 
 
 
-                    this.txtIDP.Focus();
+                    this.cbProducto.Focus();
                 }
             }
             catch (FormatException)
@@ -361,7 +340,7 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txtIDP.Text == string.Empty || txtPrecio.Text == string.Empty || txtSubtotal.Text == string.Empty || txtImp.Text == string.Empty || txtTotal.Text == string.Empty)
+                if (cbProducto.Text == string.Empty || txtPrecio.Text == string.Empty || txtSubtotal.Text == string.Empty || txtImp.Text == string.Empty || txtTotal.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede insertar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -379,20 +358,19 @@ namespace Drogueria_proyecto
                     MessageBox.Show("Aviso ... Los Datos se eliminaron exitosamente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BD.cerrar();
                     showdata();
-                    txtIDP.Clear();
+                    cbProducto.ResetText();
                     txtCantidad.Clear();
                     txtFactura.Clear();
                     txtImp.Clear();
                     txtPrecio.Clear();
-                    txtProducto.Clear();
-                    txtSubtotal.Clear();
+                    
                     txtTotal.Clear();
                     cboxCliente.ResetText();
                     cboxEmp.ResetText();
 
 
 
-                    this.txtProducto.Focus();
+                    this.cbProducto.Focus();
                 }
             }
             catch (FormatException)
@@ -443,8 +421,8 @@ namespace Drogueria_proyecto
             txtFactura.Text = dgvFactura.CurrentRow.Cells[0].Value.ToString();
             cboxEmp.Text = dgvFactura.CurrentRow.Cells[1].Value.ToString();
             cboxCliente.Text = dgvFactura.CurrentRow.Cells[2].Value.ToString();
-            txtIDP.Text = dgvFactura.CurrentRow.Cells[3].Value.ToString();    
-            txtProducto.Text = dgvFactura.CurrentRow.Cells[4].Value.ToString();
+                
+            cbProducto.Text = dgvFactura.CurrentRow.Cells[4].Value.ToString();
             txtPrecio.Text = dgvFactura.CurrentRow.Cells[5].Value.ToString();
             txtCantidad.Text = dgvFactura.CurrentRow.Cells[6].Value.ToString();
             txtSubtotal.Text = dgvFactura.CurrentRow.Cells[7].Value.ToString();
@@ -515,6 +493,94 @@ namespace Drogueria_proyecto
         }
 
         private void cboxEmp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica si hay un elemento seleccionado
+            if (cboxEmp.SelectedValue != null)
+            {
+                // Guarda el codigo_empleado en una variable
+                codigoEmpleado = cboxEmp.SelectedValue.ToString();
+
+                // Puedes usar la variable codigoEmpleado como desees
+                Console.WriteLine("Código del empleado seleccionado: " + codigoEmpleado);
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Facturass", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Facturass WHERE nombre_producto LIKE @nombre_producto", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_producto", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dgvFactura.DataSource = dt;
+
+            BD.cerrar();
+        }
+
+        private void cbProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica si hay un elemento seleccionado
+            if (cbProducto.SelectedValue != null)
+            {
+                // Guarda el codigo_producto en una variable
+                codigoProducto = cbProducto.SelectedValue.ToString();
+
+                // Conexión a la base de datos
+                using (SqlConnection conexionp = new SqlConnection("Data Source = localhost; Initial Catalog = DROGUERIA; Integrated Security = True"))
+                {
+                    conexionp.Open();
+
+                    SqlCommand cmd = new SqlCommand("Select nombre_producto, precio_producto from Producto where codigo_producto = @codigo_producto", conexionp);
+                    cmd.Parameters.AddWithValue("@codigo_producto",(codigoProducto));
+                    SqlDataReader da = cmd.ExecuteReader();
+
+                    // Verifica si hay filas devueltas
+                    if (da.HasRows)
+                    {
+                        while (da.Read())
+                        {
+                           
+                            txtPrecio.Text = da.GetValue(1).ToString();
+                        }
+                    }
+                    else
+                    {
+                        // Si no hay resultados, limpiar los TextBox
+                        
+                        txtPrecio.Text = "";
+                    }
+
+                    da.Close(); // Cierra el DataReader
+                } // La conexión se cierra automáticamente aquí debido al uso de 'using'
+            }
+            else
+            {
+                // Si el cbProducto está vacío, limpiar los TextBox
+                
+                txtPrecio.Text = "";
+            }
+        }
+
+        private void cboxCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

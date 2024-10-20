@@ -204,7 +204,7 @@ namespace Drogueria_proyecto
         {
             //fr_menu_gerente.ActiveForm.Hide();
             ActivateButton(sender, RGBColors.colorTxtWhile);
-            OpenChildForm(new Fr_gerente_inventario());
+            OpenChildForm(new fr_Producto_Admin());
 
 
         }
@@ -212,7 +212,7 @@ namespace Drogueria_proyecto
         private void button_menug_cli_Click_1(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.colorTxtWhile);
-            OpenChildForm(new Fr_gerente_cliente());
+            OpenChildForm(new Fr_Cliente_Admin());
 
         }
         //Boton para abrir y crear la instancia del formulario de proveedores

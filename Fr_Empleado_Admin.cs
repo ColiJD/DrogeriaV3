@@ -13,6 +13,7 @@ namespace Drogueria_proyecto
 {
     public partial class Fr_Empleado_Admin : Form
     {
+        private string tipo = "";
         public Fr_Empleado_Admin()
         {
             InitializeComponent();
@@ -33,6 +34,18 @@ namespace Drogueria_proyecto
             //sda.Fill(dt);
             //dtg_administrador_empleado.DataSource = dt;
             //BD.cerrar();
+
+            SqlConnection conn = new SqlConnection("Data Source = localhost; Initial Catalog = DROGUERIA; Integrated Security = True");
+            SqlCommand cmdProduct = new SqlCommand("Select codigo_tipo, nombre_tipo from Tipo_Usuario", conn);
+            SqlDataAdapter product = new SqlDataAdapter(cmdProduct);
+            DataTable table3 = new DataTable();
+            product.Fill(table3);
+            DataRow emptyProduct = table3.NewRow();
+            table3.Rows.InsertAt(emptyProduct, 0);
+            cbTipo.DataSource = table3;
+            cbTipo.DisplayMember = "nombre_tipo";
+            cbTipo.ValueMember = "codigo_tipo";
+            conn.Close();
         }
 
         private void btnRegresar_Click(object sender, EventArgs e)
@@ -44,8 +57,7 @@ namespace Drogueria_proyecto
 
         private void FrmLector_Load(object sender, EventArgs e)
         {
-            cls_Conexion clsConexion1 = new cls_Conexion();
-            clsConexion1.cargarDatos(dtg_administrador_empleado);
+           
         }
         int i;
 
@@ -57,7 +69,10 @@ namespace Drogueria_proyecto
             txt_nomempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[1].Value.ToString();
             txt_usuaempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[2].Value.ToString();
             txt_pas_ad.Text = dtg_administrador_empleado.CurrentRow.Cells[3].Value.ToString();
-            txt_tipoempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[4].Value.ToString();
+            tipo = dtg_administrador_empleado.CurrentRow.Cells[4].Value.ToString();
+
+            // Establece el valor del ComboBox a la categoría correspondiente
+            cbTipo.SelectedValue = tipo;
             txt_correoempl_gr.Text = dtg_administrador_empleado.CurrentRow.Cells[5].Value.ToString();
         }
 
@@ -66,7 +81,7 @@ namespace Drogueria_proyecto
             try
             {
                 // Verificar si hay campos vacíos
-                if (string.IsNullOrWhiteSpace(txt_tipoempl_gr.Text) ||
+                if (string.IsNullOrWhiteSpace(cbTipo.Text) ||
                     string.IsNullOrWhiteSpace(txt_usuaempl_gr.Text) ||
                     string.IsNullOrWhiteSpace(txt_nomempl_gr.Text) ||
                     string.IsNullOrWhiteSpace(txt_pas_ad.Text) ||
@@ -98,13 +113,13 @@ namespace Drogueria_proyecto
                         agregar.Parameters.AddWithValue("@nombre_empleado", txt_nomempl_gr.Text);
                         agregar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
                         agregar.Parameters.AddWithValue("@password", txt_pas_ad.Text);
-                        agregar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text);
+                        agregar.Parameters.AddWithValue("@codigo_tipo", tipo);
                         agregar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
 
                         agregar.ExecuteNonQuery();
 
                         // Limpiamos los campos y mostramos un mensaje de éxito
-                        txt_tipoempl_gr.Clear();
+                        cbTipo.ResetText();
                         txt_usuaempl_gr.Clear();
                         txt_idEmpleado_gr.Clear();
                         txt_nomempl_gr.Clear();
@@ -143,7 +158,7 @@ namespace Drogueria_proyecto
             try
             {
                 // Verificar si hay campos vacíos
-                if (string.IsNullOrWhiteSpace(txt_tipoempl_gr.Text) ||
+                if (string.IsNullOrWhiteSpace(cbTipo.Text) ||
                     string.IsNullOrWhiteSpace(txt_usuaempl_gr.Text) ||
                     string.IsNullOrWhiteSpace(txt_nomempl_gr.Text) ||
                     string.IsNullOrWhiteSpace(txt_pas_ad.Text) ||
@@ -178,14 +193,14 @@ namespace Drogueria_proyecto
                         modificar.Parameters.AddWithValue("@username", txt_usuaempl_gr.Text);
                         modificar.Parameters.AddWithValue("@password", txt_pas_ad.Text);
                         modificar.Parameters.AddWithValue("@correo", txt_correoempl_gr.Text);
-                        modificar.Parameters.AddWithValue("@codigo_tipo", txt_tipoempl_gr.Text);
+                        modificar.Parameters.AddWithValue("@codigo_tipo", tipo);
 
                         modificar.ExecuteNonQuery();
 
                         // Limpiar campos y mostrar mensaje de éxito
                         txt_idEmpleado_gr.Clear();
                         txt_nomempl_gr.Clear();
-                        txt_tipoempl_gr.Clear();
+                        cbTipo.ResetText();
                         txt_usuaempl_gr.Clear();
                         txt_pas_ad.Clear();
                         txt_correoempl_gr.Clear();
@@ -222,7 +237,7 @@ namespace Drogueria_proyecto
         {
             try
             {
-                if (txt_tipoempl_gr.Text == string.Empty || txt_usuaempl_gr.Text == string.Empty || txt_idEmpleado_gr.Text == string.Empty || txt_nomempl_gr.Text == string.Empty)
+                if (cbTipo.Text == string.Empty || txt_usuaempl_gr.Text == string.Empty || txt_idEmpleado_gr.Text == string.Empty || txt_nomempl_gr.Text == string.Empty)
                 {
                     MessageBox.Show("Error... No puede eliminar datos en blanco", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -241,7 +256,7 @@ namespace Drogueria_proyecto
                     BD.cerrar();
                     txt_idEmpleado_gr.Clear();
                     txt_nomempl_gr.Clear();
-                    txt_tipoempl_gr.Clear();
+                    cbTipo.ResetText();
                     txt_usuaempl_gr.Clear();
                     txt_pas_ad.Clear();
                     errorP_correoempl_ad.Clear();
@@ -293,14 +308,7 @@ namespace Drogueria_proyecto
             }
         }
 
-        private void txt_tipoempl_gr_TextChanged(object sender, EventArgs e)
-        {
-            if (validaciones.validartipo_u(txt_tipoempl_gr.Text, "El tipo de empleado solo debe contener numeros del 1-3"))
-            {
-                errorP_tipempl_ad.SetError(txt_tipoempl_gr, "El tipo de empleado solo debe contener numeros del 1-3");
-                txt_tipoempl_gr.Text = "";
-            }
-        }
+       
 
         private void dtg_administrador_empleado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -320,6 +328,51 @@ namespace Drogueria_proyecto
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtBuscar.Text.Trim();
+
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
+
+            SqlCommand buscar;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Si el campo está vacío, selecciona todos los clientes
+                buscar = new SqlCommand("SELECT * FROM Empleado", BD.sconexion);
+            }
+            else
+            {
+                // Si hay texto en el campo, filtra por el nombre del cliente
+                buscar = new SqlCommand("SELECT * FROM Empleado WHERE nombre_empleado LIKE @nombre_empleado", BD.sconexion);
+                buscar.Parameters.AddWithValue("@nombre_empleado", "%" + searchTerm + "%");
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(buscar);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Asignar los resultados al DataGridView
+            dtg_administrador_empleado.DataSource = dt;
+
+            BD.cerrar();
+        }
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica si hay un elemento seleccionado
+            if (cbTipo.SelectedValue != null)
+            {
+                // Guarda el codigo_empleado en una variable
+                tipo = cbTipo.SelectedValue.ToString();
+
+                // Puedes usar la variable codigoEmpleado como desees
+                Console.WriteLine("Código del empleado seleccionado: " + tipo);
+            }
 
         }
     }
