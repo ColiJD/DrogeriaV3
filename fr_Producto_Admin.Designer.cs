@@ -71,10 +71,10 @@ namespace Drogueria_proyecto
             this.label16 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cbcategoria = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.cbcategoria = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_prod_ad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dROGUERIADataSet20)).BeginInit();
@@ -469,6 +469,16 @@ namespace Drogueria_proyecto
             this.panel5.Size = new System.Drawing.Size(931, 323);
             this.panel5.TabIndex = 36;
             // 
+            // cbcategoria
+            // 
+            this.cbcategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbcategoria.FormattingEnabled = true;
+            this.cbcategoria.Location = new System.Drawing.Point(86, 116);
+            this.cbcategoria.Name = "cbcategoria";
+            this.cbcategoria.Size = new System.Drawing.Size(263, 28);
+            this.cbcategoria.TabIndex = 50;
+            this.cbcategoria.SelectedIndexChanged += new System.EventHandler(this.cbcategoria_SelectedIndexChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -509,16 +519,6 @@ namespace Drogueria_proyecto
             this.txtBuscar.Size = new System.Drawing.Size(134, 28);
             this.txtBuscar.TabIndex = 29;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            // 
-            // cbcategoria
-            // 
-            this.cbcategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbcategoria.FormattingEnabled = true;
-            this.cbcategoria.Location = new System.Drawing.Point(86, 116);
-            this.cbcategoria.Name = "cbcategoria";
-            this.cbcategoria.Size = new System.Drawing.Size(263, 28);
-            this.cbcategoria.TabIndex = 50;
-            this.cbcategoria.SelectedIndexChanged += new System.EventHandler(this.cbcategoria_SelectedIndexChanged);
             // 
             // fr_Producto_Admin
             // 

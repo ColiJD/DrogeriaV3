@@ -33,29 +33,30 @@ namespace Drogueria_proyecto
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fr_Administrador));
             this.horafecha = new System.Windows.Forms.Timer(this.components);
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.PanelTitulo = new Guna.UI2.WinForms.Guna2Panel();
+            this.LbTituloPanel = new System.Windows.Forms.Label();
+            this.PanelLateral = new Guna.UI2.WinForms.Guna2Panel();
+            this.PLogo = new Guna.UI2.WinForms.Guna2Panel();
+            this.lbTitulo = new System.Windows.Forms.Label();
             this.panelDesktop = new Guna.UI2.WinForms.Guna2Panel();
             this.labelfechag = new System.Windows.Forms.Label();
             this.labelhorag = new System.Windows.Forms.Label();
-            this.PanelTitulo = new Guna.UI2.WinForms.Guna2Panel();
-            this.LbTituloPanel = new System.Windows.Forms.Label();
             this.BtnSalir = new FontAwesome.Sharp.IconButton();
             this.BtnMaximizar = new FontAwesome.Sharp.IconButton();
             this.BtnMinimizar = new FontAwesome.Sharp.IconButton();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconButton();
-            this.PanelLateral = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnReporteAcceso = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.BtnFacturas = new FontAwesome.Sharp.IconButton();
             this.button_menug_Empleados = new FontAwesome.Sharp.IconButton();
             this.button_menug_inv = new FontAwesome.Sharp.IconButton();
             this.button_menug_cli = new FontAwesome.Sharp.IconButton();
-            this.PLogo = new Guna.UI2.WinForms.Guna2Panel();
-            this.lbTitulo = new System.Windows.Forms.Label();
             this.BtnInicio = new System.Windows.Forms.PictureBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel1.SuspendLayout();
-            this.panelDesktop.SuspendLayout();
             this.PanelTitulo.SuspendLayout();
             this.PanelLateral.SuspendLayout();
             this.PLogo.SuspendLayout();
+            this.panelDesktop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnInicio)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,6 +80,73 @@ namespace Drogueria_proyecto
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1058, 749);
             this.guna2CustomGradientPanel1.TabIndex = 1;
+            // 
+            // PanelTitulo
+            // 
+            this.PanelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.PanelTitulo.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            this.PanelTitulo.Controls.Add(this.LbTituloPanel);
+            this.PanelTitulo.Controls.Add(this.BtnSalir);
+            this.PanelTitulo.Controls.Add(this.BtnMaximizar);
+            this.PanelTitulo.Controls.Add(this.BtnMinimizar);
+            this.PanelTitulo.Controls.Add(this.iconCurrentChildForm);
+            this.PanelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelTitulo.Location = new System.Drawing.Point(300, 0);
+            this.PanelTitulo.Name = "PanelTitulo";
+            this.PanelTitulo.Size = new System.Drawing.Size(758, 60);
+            this.PanelTitulo.TabIndex = 1;
+            this.PanelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTitulo_MouseDown);
+            // 
+            // LbTituloPanel
+            // 
+            this.LbTituloPanel.AutoSize = true;
+            this.LbTituloPanel.BackColor = System.Drawing.Color.Transparent;
+            this.LbTituloPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LbTituloPanel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.LbTituloPanel.Location = new System.Drawing.Point(66, 18);
+            this.LbTituloPanel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.LbTituloPanel.Name = "LbTituloPanel";
+            this.LbTituloPanel.Size = new System.Drawing.Size(309, 24);
+            this.LbTituloPanel.TabIndex = 5;
+            this.LbTituloPanel.Text = "BIENVENIDO ADMINISTRADOR";
+            // 
+            // PanelLateral
+            // 
+            this.PanelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.PanelLateral.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            this.PanelLateral.Controls.Add(this.btnReporteAcceso);
+            this.PanelLateral.Controls.Add(this.iconButton1);
+            this.PanelLateral.Controls.Add(this.BtnFacturas);
+            this.PanelLateral.Controls.Add(this.button_menug_Empleados);
+            this.PanelLateral.Controls.Add(this.button_menug_inv);
+            this.PanelLateral.Controls.Add(this.button_menug_cli);
+            this.PanelLateral.Controls.Add(this.PLogo);
+            this.PanelLateral.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PanelLateral.Location = new System.Drawing.Point(0, 0);
+            this.PanelLateral.Name = "PanelLateral";
+            this.PanelLateral.Size = new System.Drawing.Size(300, 749);
+            this.PanelLateral.TabIndex = 0;
+            // 
+            // PLogo
+            // 
+            this.PLogo.Controls.Add(this.lbTitulo);
+            this.PLogo.Controls.Add(this.BtnInicio);
+            this.PLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PLogo.Location = new System.Drawing.Point(0, 0);
+            this.PLogo.Name = "PLogo";
+            this.PLogo.Size = new System.Drawing.Size(300, 237);
+            this.PLogo.TabIndex = 0;
+            // 
+            // lbTitulo
+            // 
+            this.lbTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitulo.ForeColor = System.Drawing.Color.White;
+            this.lbTitulo.Location = new System.Drawing.Point(56, 138);
+            this.lbTitulo.Name = "lbTitulo";
+            this.lbTitulo.Size = new System.Drawing.Size(177, 37);
+            this.lbTitulo.TabIndex = 0;
+            this.lbTitulo.Text = "MedExpress";
             // 
             // panelDesktop
             // 
@@ -120,35 +188,6 @@ namespace Drogueria_proyecto
             this.labelhorag.Size = new System.Drawing.Size(210, 73);
             this.labelhorag.TabIndex = 1;
             this.labelhorag.Text = "label1";
-            // 
-            // PanelTitulo
-            // 
-            this.PanelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
-            this.PanelTitulo.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.PanelTitulo.Controls.Add(this.LbTituloPanel);
-            this.PanelTitulo.Controls.Add(this.BtnSalir);
-            this.PanelTitulo.Controls.Add(this.BtnMaximizar);
-            this.PanelTitulo.Controls.Add(this.BtnMinimizar);
-            this.PanelTitulo.Controls.Add(this.iconCurrentChildForm);
-            this.PanelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelTitulo.Location = new System.Drawing.Point(300, 0);
-            this.PanelTitulo.Name = "PanelTitulo";
-            this.PanelTitulo.Size = new System.Drawing.Size(758, 60);
-            this.PanelTitulo.TabIndex = 1;
-            this.PanelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTitulo_MouseDown);
-            // 
-            // LbTituloPanel
-            // 
-            this.LbTituloPanel.AutoSize = true;
-            this.LbTituloPanel.BackColor = System.Drawing.Color.Transparent;
-            this.LbTituloPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LbTituloPanel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.LbTituloPanel.Location = new System.Drawing.Point(66, 18);
-            this.LbTituloPanel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.LbTituloPanel.Name = "LbTituloPanel";
-            this.LbTituloPanel.Size = new System.Drawing.Size(309, 24);
-            this.LbTituloPanel.TabIndex = 5;
-            this.LbTituloPanel.Text = "BIENVENIDO ADMINISTRADOR";
             // 
             // BtnSalir
             // 
@@ -225,21 +264,57 @@ namespace Drogueria_proyecto
             this.iconCurrentChildForm.TabIndex = 1;
             this.iconCurrentChildForm.UseVisualStyleBackColor = false;
             // 
-            // PanelLateral
+            // btnReporteAcceso
             // 
-            this.PanelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
-            this.PanelLateral.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.PanelLateral.Controls.Add(this.iconButton1);
-            this.PanelLateral.Controls.Add(this.BtnFacturas);
-            this.PanelLateral.Controls.Add(this.button_menug_Empleados);
-            this.PanelLateral.Controls.Add(this.button_menug_inv);
-            this.PanelLateral.Controls.Add(this.button_menug_cli);
-            this.PanelLateral.Controls.Add(this.PLogo);
-            this.PanelLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelLateral.Location = new System.Drawing.Point(0, 0);
-            this.PanelLateral.Name = "PanelLateral";
-            this.PanelLateral.Size = new System.Drawing.Size(300, 749);
-            this.PanelLateral.TabIndex = 0;
+            this.btnReporteAcceso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(144)))), ((int)(((byte)(183)))));
+            this.btnReporteAcceso.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReporteAcceso.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnReporteAcceso.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnReporteAcceso.FlatAppearance.BorderSize = 4;
+            this.btnReporteAcceso.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.btnReporteAcceso.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporteAcceso.ForeColor = System.Drawing.Color.White;
+            this.btnReporteAcceso.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.btnReporteAcceso.IconColor = System.Drawing.Color.White;
+            this.btnReporteAcceso.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnReporteAcceso.IconSize = 32;
+            this.btnReporteAcceso.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReporteAcceso.Location = new System.Drawing.Point(0, 637);
+            this.btnReporteAcceso.Name = "btnReporteAcceso";
+            this.btnReporteAcceso.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnReporteAcceso.Size = new System.Drawing.Size(300, 80);
+            this.btnReporteAcceso.TabIndex = 6;
+            this.btnReporteAcceso.Text = "Reporte Acceso";
+            this.btnReporteAcceso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReporteAcceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReporteAcceso.UseVisualStyleBackColor = false;
+            this.btnReporteAcceso.Click += new System.EventHandler(this.btnReporteAcceso_Click);
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(144)))), ((int)(((byte)(183)))));
+            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.iconButton1.FlatAppearance.BorderSize = 4;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.Color.White;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 32;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(0, 557);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.iconButton1.Size = new System.Drawing.Size(300, 80);
+            this.iconButton1.TabIndex = 5;
+            this.iconButton1.Text = "Proveedores";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // BtnFacturas
             // 
@@ -346,27 +421,6 @@ namespace Drogueria_proyecto
             this.button_menug_cli.UseVisualStyleBackColor = false;
             this.button_menug_cli.Click += new System.EventHandler(this.button_menug_cli_Click);
             // 
-            // PLogo
-            // 
-            this.PLogo.Controls.Add(this.lbTitulo);
-            this.PLogo.Controls.Add(this.BtnInicio);
-            this.PLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PLogo.Location = new System.Drawing.Point(0, 0);
-            this.PLogo.Name = "PLogo";
-            this.PLogo.Size = new System.Drawing.Size(300, 237);
-            this.PLogo.TabIndex = 0;
-            // 
-            // lbTitulo
-            // 
-            this.lbTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.ForeColor = System.Drawing.Color.White;
-            this.lbTitulo.Location = new System.Drawing.Point(56, 138);
-            this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(177, 37);
-            this.lbTitulo.TabIndex = 0;
-            this.lbTitulo.Text = "MedExpress";
-            // 
             // BtnInicio
             // 
             this.BtnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -378,32 +432,6 @@ namespace Drogueria_proyecto
             this.BtnInicio.TabIndex = 0;
             this.BtnInicio.TabStop = false;
             this.BtnInicio.Click += new System.EventHandler(this.BtnInicio_Click);
-            // 
-            // iconButton1
-            // 
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(144)))), ((int)(((byte)(183)))));
-            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.iconButton1.FlatAppearance.BorderSize = 4;
-            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
-            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.ForeColor = System.Drawing.Color.White;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
-            this.iconButton1.IconColor = System.Drawing.Color.White;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 32;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(0, 557);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.iconButton1.Size = new System.Drawing.Size(300, 80);
-            this.iconButton1.TabIndex = 5;
-            this.iconButton1.Text = "Proveedores";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // Fr_Administrador
             // 
@@ -420,12 +448,12 @@ namespace Drogueria_proyecto
             this.Load += new System.EventHandler(this.Fr_Administrador_Load);
             this.Resize += new System.EventHandler(this.Fr_Administrador_Resize);
             this.guna2CustomGradientPanel1.ResumeLayout(false);
-            this.panelDesktop.ResumeLayout(false);
-            this.panelDesktop.PerformLayout();
             this.PanelTitulo.ResumeLayout(false);
             this.PanelTitulo.PerformLayout();
             this.PanelLateral.ResumeLayout(false);
             this.PLogo.ResumeLayout(false);
+            this.panelDesktop.ResumeLayout(false);
+            this.panelDesktop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnInicio)).EndInit();
             this.ResumeLayout(false);
 
@@ -452,5 +480,6 @@ namespace Drogueria_proyecto
         private System.Windows.Forms.Label lbTitulo;
         private System.Windows.Forms.PictureBox BtnInicio;
         private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnReporteAcceso;
     }
 }

@@ -51,6 +51,7 @@ namespace Drogueria_proyecto
             this.PLogo = new Guna.UI2.WinForms.Guna2Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
             this.BtnInicio = new System.Windows.Forms.PictureBox();
+            this.btnAcceso = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             this.PanelTitulo.SuspendLayout();
@@ -244,6 +245,7 @@ namespace Drogueria_proyecto
             // 
             // PReportServices
             // 
+            this.PReportServices.Controls.Add(this.btnAcceso);
             this.PReportServices.Controls.Add(this.BtnReportClient);
             this.PReportServices.Dock = System.Windows.Forms.DockStyle.Top;
             this.PReportServices.Location = new System.Drawing.Point(0, 557);
@@ -416,6 +418,32 @@ namespace Drogueria_proyecto
             this.BtnInicio.TabStop = false;
             this.BtnInicio.Click += new System.EventHandler(this.BtnInicio_Click);
             // 
+            // btnAcceso
+            // 
+            this.btnAcceso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(144)))), ((int)(((byte)(183)))));
+            this.btnAcceso.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAcceso.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAcceso.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnAcceso.FlatAppearance.BorderSize = 4;
+            this.btnAcceso.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(93)))), ((int)(((byte)(120)))));
+            this.btnAcceso.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcceso.ForeColor = System.Drawing.Color.White;
+            this.btnAcceso.IconChar = FontAwesome.Sharp.IconChar.FileContract;
+            this.btnAcceso.IconColor = System.Drawing.Color.White;
+            this.btnAcceso.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAcceso.IconSize = 32;
+            this.btnAcceso.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAcceso.Location = new System.Drawing.Point(0, 80);
+            this.btnAcceso.Name = "btnAcceso";
+            this.btnAcceso.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnAcceso.Size = new System.Drawing.Size(300, 80);
+            this.btnAcceso.TabIndex = 6;
+            this.btnAcceso.Text = "Reporte Acceso";
+            this.btnAcceso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAcceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAcceso.UseVisualStyleBackColor = false;
+            this.btnAcceso.Click += new System.EventHandler(this.btnAcceso_Click);
+            // 
             // fr_menu_gerente
             // 
             this.ClientSize = new System.Drawing.Size(1058, 749);
@@ -459,5 +487,6 @@ namespace Drogueria_proyecto
         private Guna.UI2.WinForms.Guna2Panel PReportServices;
         private FontAwesome.Sharp.IconButton BtnReportClient;
         private System.Windows.Forms.Label LbTituloPanel;
+        private FontAwesome.Sharp.IconButton btnAcceso;
     }
 }

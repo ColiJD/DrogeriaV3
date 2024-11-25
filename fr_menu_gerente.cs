@@ -262,5 +262,11 @@ namespace Drogueria_proyecto
             ActivateButton(sender, RGBColors.colorTxtWhile);
             OpenChildForm(new FormReporteProducto());
         }
+
+        private void btnAcceso_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.colorTxtWhile);
+            OpenChildForm(new ReporteAcceso());
+        }
     }
 }

@@ -71,65 +71,87 @@ namespace Drogueria_proyecto
 
         }
 
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
-
-          //  int tipousuario;
             int tipologin = 0;
-           
-            
 
-             //   tipousuario = 1;
-                cls_Conexion BD = new cls_Conexion();
-                BD.abrir();
+            cls_Conexion BD = new cls_Conexion();
+            BD.abrir();
 
-                SqlCommand cmd = new SqlCommand("SELECT codigo_tipo, username, password FROM Empleado WHERE username=@usuario AND password=@pas", BD.sconexion);
+            try
+            {
+                // Consulta para validar el usuario
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT codigo_tipo, username, password FROM Empleado WHERE username=@usuario AND password=@pas",
+                    BD.sconexion
+                );
 
                 cmd.Parameters.AddWithValue("usuario", textUsuario.Text.ToString());
                 cmd.Parameters.AddWithValue("pas", textContrasena.Text.ToString());
-                SqlDataReader sda;
 
-                sda = cmd.ExecuteReader();
-                if (sda.Read() == true)
-                {
-                  
-                    tipologin = Convert.ToInt32(sda[0]);
-                    if(tipologin == 1)
-                {
-                    MessageBox.Show("Usuario Encontrado");
-                    Login.ActiveForm.Hide();
-                    fr_menu_gerente Gerenteform = new fr_menu_gerente();
-                    Gerenteform.Show();
-                }
-                    if (tipologin == 2)
-                {   
-                     MessageBox.Show("Usuario Encontrado");
-                     Login.ActiveForm.Hide();
-                     Fr_Administrador Administradorform = new Fr_Administrador();
-                     Administradorform.Show();
-                }
-                if (tipologin == 3)
-                {
-                    MessageBox.Show("Usuario Encontrado");
-                    Login.ActiveForm.Hide();
-                    fr_Vendedor_menu Vendedorform = new fr_Vendedor_menu();
-                    Vendedorform.Show();
+                SqlDataReader sda = cmd.ExecuteReader();
 
-                }
-                    
+                if (sda.Read())
+                {
+                    string username = sda["username"].ToString();
+                    tipologin = Convert.ToInt32(sda["codigo_tipo"]);
 
+                    // Registrar el inicio de sesión en la tabla de auditoría
+                    sda.Close(); // Cierra el SqlDataReader antes de realizar otra consulta
+                    SqlCommand logCmd = new SqlCommand(
+                        "INSERT INTO AuditoriaLogin (Username, FechaHora, Accion) VALUES (@username, @fecha, @accion)",
+                        BD.sconexion
+                    );
+                    logCmd.Parameters.AddWithValue("username", username);
+                    logCmd.Parameters.AddWithValue("fecha", DateTime.Now);
+                    logCmd.Parameters.AddWithValue("accion", "Inicio de sesión");
+
+                    logCmd.ExecuteNonQuery();
+
+                    // Lógica de redirección según el tipo de usuario
+                    if (tipologin == 1)
+                    {
+                        MessageBox.Show("Usuario Encontrado");
+                        Login.ActiveForm.Hide();
+                        fr_menu_gerente Gerenteform = new fr_menu_gerente();
+                        Gerenteform.Show();
+                    }
+                    else if (tipologin == 2)
+                    {
+                        MessageBox.Show("Usuario Encontrado");
+                        Login.ActiveForm.Hide();
+                        Fr_Administrador Administradorform = new Fr_Administrador();
+                        Administradorform.Show();
+                    }
+                    else if (tipologin == 3)
+                    {
+                        MessageBox.Show("Usuario Encontrado");
+                        Login.ActiveForm.Hide();
+                        fr_Vendedor_menu Vendedorform = new fr_Vendedor_menu();
+                        Vendedorform.Show();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Usuario No Encontrado");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            finally
+            {
                 BD.cerrar();
+            }
 
+            // Limpiar errores
             errorP_usuario_login.Clear();
             errorP_pas_login.Clear();
+        }
 
-            }
+            
         
 
         //Metodo para ocultar la contraseña o mostrarla mediante un checkbox
